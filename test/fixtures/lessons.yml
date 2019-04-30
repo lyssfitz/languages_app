@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  language: one
+  lesson_date: 2019-04-30
+  lesson_time: 2019-04-30 14:40:35
+  street: MyString
+  city: MyString
+  state: MyString
+  postcode: MyString
+  country: MyString
+  body: MyText
+  price: 1
+  max_students: 1
+  difficulty: 1
+  cancelled: false
+
+two:
+  user: two
+  language: two
+  lesson_date: 2019-04-30
+  lesson_time: 2019-04-30 14:40:35
+  street: MyString
+  city: MyString
+  state: MyString
+  postcode: MyString
+  country: MyString
+  body: MyText
+  price: 1
+  max_students: 1
+  difficulty: 1
+  cancelled: false
