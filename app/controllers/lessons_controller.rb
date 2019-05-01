@@ -1,5 +1,6 @@
 class LessonsController < ApplicationController
-    
+    before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+
     def index
         @lessons = Lesson.all
     end
@@ -13,19 +14,25 @@ class LessonsController < ApplicationController
     end
 
     def show
-
+        
     end
 
     def edit 
-
+        
     end
 
     def update 
-
+        
     end
 
     def destroy 
-
+        
     end
 
+    private
+    
+    def set_lesson
+        id = params[:id]
+        @lesson = Lesson.find(id)
+    end
 end
