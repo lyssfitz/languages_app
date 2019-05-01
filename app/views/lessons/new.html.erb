@@ -38,17 +38,22 @@
     </div>
 
     <div>
-        <%= form.label :price %>
-        <%= form.number_field :price%>
+        <%= form.label :price, "Ticket Price" %>
+        <%= form.number_field :price, in: 10..100 %>
     </div>
 
     <div>
         <%= form.label :max_students, "Max Students"%>
-        <%= form.number_field :max_students %>
+        <%= form.number_field :max_students, in: 5..30, step: 5 %>
     </div>
 
     <div>
         <%= form.label :difficulty %>
+        <%= form.select(:difficulty, [["Easy", 1], ["Intermediate", 2], ["Expert", 3]])%>
+    </div>
+
+    <div>
+        <%= form.submit %>
     </div>
 
 <% end %>
