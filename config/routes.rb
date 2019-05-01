@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   get "/lessons", to: "lessons#index", as: "lessons"
   post "/lessons", to: "lessons#create"
-  get "/lessons/:id/new", to: "lessons#new", as: "new_lesson"
+  get "/lessons/new", to: "lessons#new", as: "new_lesson"
   get "/lessons/:id", to: "lessons#show", as: "lesson"
   put "/lessons/:id", to: "lessons#update"
   patch "/lessons/:id", to: "lessons#update"

@@ -6,7 +6,7 @@ class LessonsController < ApplicationController
     end
 
     def create
-
+        @lesson = Lesson.create(lesson_params)
     end
 
     def new
@@ -37,4 +37,8 @@ class LessonsController < ApplicationController
         id = params[:id]
         @lesson = Lesson.find(id)
     end
+
+    def lesson_params
+        params.require(:lesson).permit(:language, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty )
+    end 
 end
