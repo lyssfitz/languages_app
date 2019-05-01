@@ -1,5 +1,8 @@
 class LessonsController < ApplicationController
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+    before_action :set_languages, only: [:new, :edit]
+    before_action :set_difficulty, only: [:new, :edit]
+
 
     def index
         @lessons = Lesson.all
@@ -7,12 +10,19 @@ class LessonsController < ApplicationController
 
     def create
         @lesson = Lesson.create(lesson_params)
+
+        if @lesson.errors.any?
+            set_languages
+            set_difficulty
+            render "new"
+        else
+            redirect_to lessons_path    
+        end
+        
     end
 
     def new
         @lesson = Lesson.new
-        @languages = Language.all
-        @difficulty = Lesson.difficulties.keys
     end
 
     def show
@@ -32,6 +42,14 @@ class LessonsController < ApplicationController
     end
 
     private
+
+    def set_languages
+        @languages = Language.all
+    end
+
+    def set_difficulty
+        @difficulty = Lesson.difficulties.keys
+    end
 
     def set_lesson
         id = params[:id]
