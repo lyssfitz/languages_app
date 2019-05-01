@@ -1,0 +1,70 @@
+<h2>Create Account</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date_of_birth, "Date of Birth" %>
+    <%= f.date_field :date_of_birth %>
+  </div>
+
+  <p>Gender:</p>
+  <% User.genders.each do |option, k|%>
+    <div class="field">
+      <%= f.label "gender_#{option}".to_sym, option  %>
+      <%= f.radio_button :gender, option %>
+    </div>
+  <% end %>
+
+  <p>Do you want to be a Student or a Teacher?</p>
+  <% User.roles.each do |option, k|%>
+    <div class="field">
+      <%= f.label "role_#{option}".to_sym, option  %>
+      <%= f.radio_button :role, option %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.select :city, [["Sydney, Australia"]]  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :biography, "Tell us about you" %><br />
+    <%= f.text_area :biography %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Account" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

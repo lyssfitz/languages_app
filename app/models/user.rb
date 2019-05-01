@@ -10,4 +10,10 @@ class User < ApplicationRecord
   has_many :comments
   enum gender: {female: 0, male: 1}
   enum role: {student: 0, teacher: 1} 
+
+  after_initialize :set_default_role, :if => :new_record?
+
+  def set_default_role
+    self.role ||= :student
+  end
 end
