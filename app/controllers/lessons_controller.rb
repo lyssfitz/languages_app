@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
     
     def index
-        render plain: "test"
+        @lessons = Lesson.all
     end
 
     def create
