@@ -1,0 +1,48 @@
+<h1> New Lesson </h1>
+
+<%= form_with model: @lesson, local:true do |form| %>
+    
+    <div> 
+        <%= form.label :language, "Language"%>
+    </div> 
+    <div>
+        <%= form.label :body, "Lesson Focus" %>
+        <%= form.text_field :body %>
+    </div>
+
+    <div>
+        <%= form.label :lesson_date, "Date" %>
+    </div>
+
+    <div>
+        <%= form.label :lesson_time, "Time" %>
+    </div>
+
+    <div>
+        <%= form.label :street %>
+        <%= form.text_field :street %>
+    </div>
+
+    <div>
+        <%= form.label :city %>
+        <%= form.text_field :city%>
+    </div>
+
+    <div>
+        <%= form.label :postcode %>
+        <%= form.text_field :postcode %>
+    </div>
+
+    <div>
+        <%= form.label :price %>
+    </div>
+
+    <div>
+        <%= form.label :max_students, "Max Students"%>
+    </div>
+
+    <div>
+        <%= form.label :difficulty %>
+    </div>
+
+<% end %>

@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
     end
 
     def new
-
+        @lesson = Lesson.new
     end
 
     def show
@@ -30,7 +30,7 @@ class LessonsController < ApplicationController
     end
 
     private
-    
+
     def set_lesson
         id = params[:id]
         @lesson = Lesson.find(id)
