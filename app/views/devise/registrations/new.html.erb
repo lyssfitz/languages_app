@@ -37,7 +37,7 @@
   </div>
 
   <p>Gender:</p>
-  <% User.genders.each do |option, k|%>
+  <% User.genders.keys.each do |option|%>
     <div class="field">
       <%= f.label "gender_#{option}".to_sym, option  %>
       <%= f.radio_button :gender, option %>
@@ -45,7 +45,7 @@
   <% end %>
 
   <p>Do you want to be a Student or a Teacher?</p>
-  <% User.roles.each do |option, k|%>
+  <% User.roles.keys.each do |option| %>
     <div class="field">
       <%= f.label "role_#{option}".to_sym, option  %>
       <%= f.radio_button :role, option %>

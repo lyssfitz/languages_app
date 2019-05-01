@@ -5,11 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :lessons
-  has_many :lessons, through: :user_languages
+  has_many :users_languages
+  has_many :languages, through: :users_languages
   has_many :orders
   has_many :comments
   enum gender: {female: 0, male: 1}
   enum role: {student: 0, teacher: 1} 
+
+  accepts_nested_attributes_for :users_languages
 
   after_initialize :set_default_role, :if => :new_record?
 
