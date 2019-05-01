@@ -4,18 +4,22 @@
     
     <div> 
         <%= form.label :language, "Language"%>
+        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id]}) %>
+        
     </div> 
     <div>
         <%= form.label :body, "Lesson Focus" %>
-        <%= form.text_field :body %>
+        <%= form.text_area :body %>
     </div>
 
     <div>
         <%= form.label :lesson_date, "Date" %>
+        <%= form.date_field :lesson_date %>
     </div>
 
     <div>
         <%= form.label :lesson_time, "Time" %>
+        <%= form.time_field :lesson_time %>
     </div>
 
     <div>
@@ -35,10 +39,12 @@
 
     <div>
         <%= form.label :price %>
+        <%= form.number_field :price%>
     </div>
 
     <div>
         <%= form.label :max_students, "Max Students"%>
+        <%= form.number_field :max_students %>
     </div>
 
     <div>

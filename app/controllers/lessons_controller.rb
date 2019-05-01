@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
 
     def new
         @lesson = Lesson.new
+        @languages = Language.all
     end
 
     def show
