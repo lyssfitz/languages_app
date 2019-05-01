@@ -32,13 +32,23 @@
         <%= form.text_field :city%>
     </div>
 
+       <div>
+        <%= form.label :state %>
+        <%= form.text_field :state%>
+    </div>
+
+       <div>
+        <%= form.label :country %>
+        <%= form.text_field :country %>
+    </div>
+
     <div>
         <%= form.label :postcode %>
         <%= form.text_field :postcode %>
     </div>
 
     <div>
-        <%= form.label :price, "Ticket Price" %>
+        <%= form.label :price, "Ticket Price $" %>
         <%= form.number_field :price, in: 10..100 %>
     </div>
 
@@ -47,10 +57,12 @@
         <%= form.number_field :max_students, in: 5..30, step: 5 %>
     </div>
 
+
+   
     <div>
-        <%= form.label :difficulty %>
-        <%= form.select(:difficulty, [["Easy", 1], ["Intermediate", 2], ["Expert", 3]])%>
-    </div>
+        <%= form.label :difficulty, "What is the level of difficulty?" %>
+        <%= form.select(:difficulty,  @difficulty )%>
+   </div>
 
     <div>
         <%= form.submit %>

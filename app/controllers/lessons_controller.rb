@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
     def new
         @lesson = Lesson.new
         @languages = Language.all
+        @difficulty = Lesson.difficulties.keys
     end
 
     def show
