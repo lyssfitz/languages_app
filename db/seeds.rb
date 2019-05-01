@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Language_names = ["Chinese", "English", "Spanish", "Hindi", "Italian", "Korean", "Portuguese", "Japanese", "Arabic", "Russian", "French", "German"]
+
+if Language.count == 0
+    Language_names.each do |name|
+        Language.create(name: name)
+        puts "#{name} created"
+    end
+end
