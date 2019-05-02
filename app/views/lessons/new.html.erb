@@ -1,0 +1,77 @@
+<h1> New Lesson </h1>
+
+<% if @lesson.errors.any? %>
+    <% @lesson.errors.full_messages.each do |error|%>
+        <p> <%= error %> </p>
+    <% end %>
+<% end %>
+
+<%= form_with model: @lesson, local:true do |form| %>
+    
+    <div> 
+        <%= form.label :language, "Language"%>
+        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id]}) %>
+        
+    </div> 
+    <div>
+        <%= form.label :body, "Lesson Focus" %>
+        <%= form.text_area :body %>
+    </div>
+
+    <div>
+        <%= form.label :lesson_date, "Date" %>
+        <%= form.date_field :lesson_date %>
+    </div>
+
+    <div>
+        <%= form.label :lesson_time, "Time" %>
+        <%= form.time_field :lesson_time %>
+    </div>
+
+    <div>
+        <%= form.label :street %>
+        <%= form.text_field :street %>
+    </div>
+
+    <div>
+        <%= form.label :city %>
+        <%= form.text_field :city%>
+    </div>
+
+       <div>
+        <%= form.label :state %>
+        <%= form.text_field :state%>
+    </div>
+
+       <div>
+        <%= form.label :country %>
+        <%= form.text_field :country %>
+    </div>
+
+    <div>
+        <%= form.label :postcode %>
+        <%= form.text_field :postcode %>
+    </div>
+
+    <div>
+        <%= form.label :price, "Ticket Price $" %>
+        <%= form.number_field :price, in: 10..100 %>
+    </div>
+
+    <div>
+        <%= form.label :max_students, "Max Students"%>
+        <%= form.number_field :max_students, in: 5..30, step: 5 %>
+    </div>
+
+
+   
+    <div>
+        <%= form.label :difficulty, "What is the level of difficulty?" %>
+        <%= form.select(:difficulty,  @difficulty )%>
+   </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+
+<% end %>
