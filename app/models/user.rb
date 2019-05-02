@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :comments
   enum gender: {female: 0, male: 1}
   enum role: {student: 0, teacher: 1} 
-
+  has_one_attached :picture
 end

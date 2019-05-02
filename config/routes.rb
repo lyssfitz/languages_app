@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   delete "/lessons/:id", to: "lessons#destroy"
   get "/lessons/:id/edit", to: "lessons#edit", as: "edit_lesson"
   get '/', to: 'pages#index', as: 'home'
+  get '/profile', to:'pages#show', as: 'profile'
 end
  

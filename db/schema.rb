@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_011348) do
+ActiveRecord::Schema.define(version: 2019_05_02_051017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,15 +84,6 @@ ActiveRecord::Schema.define(version: 2019_05_02_011348) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "user_languages", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "language_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["language_id"], name: "index_user_languages_on_language_id"
-    t.index ["user_id"], name: "index_user_languages_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -128,8 +119,6 @@ ActiveRecord::Schema.define(version: 2019_05_02_011348) do
   add_foreign_key "lessons", "users"
   add_foreign_key "orders", "lessons"
   add_foreign_key "orders", "users"
-  add_foreign_key "user_languages", "languages"
-  add_foreign_key "user_languages", "users"
   add_foreign_key "users_languages", "languages"
   add_foreign_key "users_languages", "users"
 end

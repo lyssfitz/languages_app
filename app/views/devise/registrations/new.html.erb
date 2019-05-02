@@ -66,6 +66,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :picture %>
+    <%= f.file_field :picture, accept: "image/png, image/gif, image/jpeg, image/jpg" %>
+  </div>
+
+  <div class="field">
     <%= f.label :biography, "Tell us about you" %><br />
     <%= f.text_area :biography, placeholder: "Add some details about yourself.." %>
   </div>
