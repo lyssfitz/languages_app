@@ -4,7 +4,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   
     def create
- 
+        @languages = Language.all
+        UsersLanguage.create(
+            
+        )
     end
   
     def update

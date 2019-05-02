@@ -4,31 +4,31 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, placeholder: "First Name", autofocus: true %>
   </div>
   
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, placeholder: "Last Name", autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email %>
+    <%= f.email_field :email, placeholder: "Email Address", autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% end %>
+    <%= f.password_field :password, placeholder: "Create Password", autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, placeholder: "Confirm Password", autocomplete: "new-password" %>
   </div>
 
   <div class="field">
@@ -39,7 +39,7 @@
   <p>Gender:</p>
   <% User.genders.keys.each do |option|%>
     <div class="field">
-      <%= f.label "gender_#{option}".to_sym, option  %>
+      <%= f.label "gender_#{option}".to_sym, option.titleize  %>
       <%= f.radio_button :gender, option %>
     </div>
   <% end %>
@@ -47,19 +47,27 @@
   <p>Do you want to be a Student or a Teacher?</p>
   <% User.roles.keys.each do |option| %>
     <div class="field">
-      <%= f.label "role_#{option}".to_sym, option  %>
+      <%= f.label "role_#{option}".to_sym, option.titleize  %>
       <%= f.radio_button :role, option %>
     </div>
   <% end %>
 
+  <p>What language do you want to learn?</p>
+  <% Language.all.each do |option| %>
+    <div class="field">
+      <%= f.label :languages, option.name  %>
+      <%= f.radio_button :languages, option.id %>
+    </div>
+  <% end %>
+
   <div class="field">
-    <%= f.label :city %><br />
+    <%= f.label :city, "City:" %>
     <%= f.select :city, [["Sydney, Australia"]]  %>
   </div>
 
   <div class="field">
     <%= f.label :biography, "Tell us about you" %><br />
-    <%= f.text_area :biography %>
+    <%= f.text_area :biography, placeholder: "Add some details about yourself.." %>
   </div>
 
   <div class="actions">
@@ -67,4 +75,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<p>Already have an account?</p> <%= render "devise/shared/links" %>

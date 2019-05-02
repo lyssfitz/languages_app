@@ -12,11 +12,4 @@ class User < ApplicationRecord
   enum gender: {female: 0, male: 1}
   enum role: {student: 0, teacher: 1} 
 
-  accepts_nested_attributes_for :users_languages
-
-  after_initialize :set_default_role, :if => :new_record?
-
-  def set_default_role
-    self.role ||= :student
-  end
 end
