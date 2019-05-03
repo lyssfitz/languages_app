@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       user_id: current_user.id,
       language_id: params[:user][:languages]
     )
+    redirect_to profile_path
   end
 
   # GET /resource/edit

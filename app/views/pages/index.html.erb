@@ -2,9 +2,6 @@
 
 <%= render 'login' if !user_signed_in? %>
 
-<% if user_signed_in? %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-<% end %>
 </p>
 
 <h2> Join the Lang.Up Crew</h2>
