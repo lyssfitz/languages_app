@@ -1,0 +1,12 @@
+<div class="navbar">
+    <div>
+        <h1><a href="<%= home_path %>">Lang.Up</a></h1>
+    </div>
+    <nav>
+        <% if user_signed_in? %>
+            <%= link_to 'New Lesson', new_lesson_path %>
+            <%= link_to 'My Lessons', lessons_path %>
+            <%= link_to "Log out", destroy_user_session_path, method:'delete' %>
+        <% end %>
+    </nav>
+</div>

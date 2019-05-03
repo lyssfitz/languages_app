@@ -9,9 +9,8 @@
 <%= form_with model: @lesson, local:true do |form| %>
     
     <div> 
-        <%= form.label :language, "Language"%>
-        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id]}) %>
-        
+        <%= form.label :language_id, "Language"%>
+        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id]}) %>   
     </div> 
     <div>
         <%= form.label :body, "Lesson Focus" %>
