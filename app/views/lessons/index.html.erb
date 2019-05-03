@@ -2,10 +2,9 @@
 
 <% @lessons.each do |lesson| %>
     <div class="lessons_card">
-        <p><%= lesson.date %></p> 
-        <p><%= lesson.language %></p> 
+        <p><%= lesson.lesson_date %></p> 
+        <p><%= lesson.language.name %></p> 
         <p><%= lesson.difficulty %></p> 
-        <p><%= lesson.orders %></p> 
         <%= link_to "edit", edit_lesson_path(lesson.id)%>
     </div>
 
@@ -16,10 +15,9 @@
 
 <% @lessons.each do |lesson| %>
     <div class="lessons_card">
-        <p><%= lesson.date %></p> 
-        <p><%= lesson.language %></p> 
+        <p><%= lesson.lesson_date %></p> 
+        <p><%= lesson.language.name %></p> 
         <p><%= lesson.difficulty %></p> 
-        <p><%= lesson.orders %></p> 
     </div>
 
 

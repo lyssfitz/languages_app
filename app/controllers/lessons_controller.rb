@@ -1,4 +1,5 @@
 class LessonsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
@@ -9,7 +10,7 @@ class LessonsController < ApplicationController
     end
 
     def create
-        @lesson = Lesson.create(lesson_params)
+        @lesson = current_user.lessons.create(lesson_params)
 
         if @lesson.errors.any?
             set_languages
@@ -57,6 +58,6 @@ class LessonsController < ApplicationController
     end
 
     def lesson_params
-        params.require(:lesson).permit(:language, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty )
+        params.require(:lesson).permit(:language_id, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty )
     end 
 end
