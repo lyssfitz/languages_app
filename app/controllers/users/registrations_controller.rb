@@ -21,10 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
-    UsersLanguage.update(
-      user_id: current_user.id,
-      language_id: params[:user][:languages]
-    )
+    # UsersLanguage.update(
+    #   language_id: params[:user][:languages]
+    # )
   end
 
   # PUT /resource
