@@ -1,7 +1,7 @@
 <%= form_with model: @lesson, local:true do |form| %>
     <div> 
         <%= form.label :language_id, "Language"%>
-        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id] }) %>
+        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id] }, prompt: "Select Language") %>
     </div> 
     <div>
         <%= form.label :body, "Lesson Focus" %>
@@ -10,12 +10,13 @@
 
     <div>
         <%= form.label :lesson_date, "Date" %>
-        <%= form.date_field :lesson_date %>
+        <%= form.date_field :lesson_date, min: Date.today %>
     </div>
 
     <div>
         <%= form.label :lesson_time, "Time" %>
         <%= form.time_field :lesson_time %>
+
     </div>
 
     <div>
@@ -50,14 +51,14 @@
 
     <div>
         <%= form.label :max_students, "Max Students"%>
-        <%= form.number_field :max_students, in: 5..30, step: 5 %>
+        <%= form.number_field :max_students, in: 5..30 %>
     </div>
 
 
    
     <div>
         <%= form.label :difficulty, "What is the level of difficulty?" %>
-        <%= form.select(:difficulty,  @difficulty )%>
+        <%= form.select(:difficulty,  @difficulty, prompt: "Select Language" )%>
    </div>
 
     <div>
