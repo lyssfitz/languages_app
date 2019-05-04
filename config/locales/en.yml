@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      lesson:
+        body: "Lesson Focus"
+    errors:
+      models:
+        user:
+          attributes:
+            body:
+              blank: "is required"
