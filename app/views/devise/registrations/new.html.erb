@@ -4,22 +4,18 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :first_name %>
     <%= f.text_field :first_name, placeholder: "First Name", autofocus: true %>
   </div>
   
   <div class="field">
-    <%= f.label :last_name %>
     <%= f.text_field :last_name, placeholder: "Last Name", autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
     <%= f.email_field :email, placeholder: "Email Address", autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password, "Create Password" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %>
@@ -27,7 +23,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm Password" %>
     <%= f.password_field :password_confirmation, placeholder: "Confirm Password", autocomplete: "new-password" %>
   </div>
 
@@ -52,7 +47,7 @@
     </div>
   <% end %>
 
-  <p>What language do you want to learn?</p>
+  <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
   <% Language.all.each do |option| %>
     <div class="field">
       <%= f.label :languages, option.name  %>
@@ -66,6 +61,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :picture %>
+    <%= f.file_field :picture, accept: "image/png, image/gif, image/jpeg, image/jpg" %>
+  </div>
+
+  <div class="field">
     <%= f.label :biography, "Tell us about you" %><br />
     <%= f.text_area :biography, placeholder: "Add some details about yourself.." %>
   </div>
@@ -76,3 +76,18 @@
 <% end %>
 
 <p>Already have an account?</p> <%= render "devise/shared/links" %>
+
+<script>
+  let student = document.getElementById("user_role_student")
+  let teacher = document.getElementById("user_role_teacher")
+
+student.addEventListener("click",function(){
+   document.getElementById("learn_teach").innerHTML = "Learn";
+})
+
+teacher.addEventListener("click",function(){
+   document.getElementById("learn_teach").innerHTML = "Teach";
+})
+
+
+</script>

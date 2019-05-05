@@ -1,0 +1,6 @@
+<div>
+    <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+    <div >
+        <%= image_tag @user.picture if @user.picture.attached? %>
+    </div>
+</div>
