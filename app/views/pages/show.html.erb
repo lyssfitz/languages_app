@@ -1,6 +1,18 @@
 <div>
-    <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
-    <div >
+    <div>
         <%= image_tag @user.picture if @user.picture.attached? %>
+    </div>
+    <div>
+        <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+    </div>
+    <div>
+        <p>Location: <%= @user.city %></p>
+    </div>
+    <div>
+        <p>Languages I speak:  
+        </p>
+    </div>
+    <div>
+        <%= @user.biography %>
     </div>
 </div>
