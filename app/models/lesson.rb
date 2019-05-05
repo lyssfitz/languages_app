@@ -19,20 +19,20 @@ class Lesson < ApplicationRecord
   end
 
   def lesson_time_must_be_within_timeframe
-    if lesson_time.present? && !("08:00"..."20:00").include?(lesson_time.strftime("%H:%M"))
+    unless ("08:00"..."20:00").include?(lesson_time.strftime("%H:%M"))
       errors.add(:lesson_time, "must be between 08:00 and 20:00")
           end
   end
 
   def price_must_be_within_range
-    if price != 10..100
+    unless (10..100).include?(price)
       errors.add(:price, "must be between $10 and $100")
     end
   end
 
   def max_students_must_be_within_range
-    if max_students != 5..30
-      errors.add(:max_students, "max students must be between 5 and 30")
+    unless (5..30).include?(max_students)
+      errors.add(:max_students, "must be between 5 and 30")
     end
   end
 

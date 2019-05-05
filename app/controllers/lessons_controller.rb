@@ -6,7 +6,7 @@ class LessonsController < ApplicationController
 
 
     def index
-        @lessons = Lesson.all
+        @lessons = current_user.lessons.index
     end
 
     def create
