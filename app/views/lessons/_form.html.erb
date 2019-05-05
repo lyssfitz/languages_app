@@ -10,7 +10,7 @@
 
     <div>
         <%= form.label :lesson_date, "Date" %>
-        <%= form.date_field :lesson_date, min: Date.today %>
+        <%= form.date_field :lesson_date, min: Date.today max: Date.today.next_year %>
     </div>
 
     <div>

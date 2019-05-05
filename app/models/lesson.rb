@@ -4,11 +4,17 @@ class Lesson < ApplicationRecord
   has_many :comments
   enum difficulty: { easy:0, intermediate: 1, expert:2 }
   validates :language, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty, presence: true 
-  validate :lesson_date_cannot_be_in_the_past, :price_must_be_within_range, :lesson_time_must_be_within_timeframe, :max_students_must_be_within_range
+  validate :lesson_date_must_not_be_in_the_past, :lesson_date_must_be_within_12_months, :price_must_be_within_range, :lesson_time_must_be_within_timeframe, :max_students_must_be_within_range
 
-  def lesson_date_cannot_be_in_the_past
-    if lesson_date.present? && lesson_date < Date.today
-            errors.add(:lesson_date, "can't be in the past")
+  def lesson_date_must_not_be_in_the_past
+    if  lesson_date < Date.today
+            errors.add(:lesson_date, "must not be in the past")
+          end
+  end
+
+  def lesson_date_must_be_within_12_months
+    if  lesson_date > Date.today.next_year
+            errors.add(:lesson_date, "must not be more than 12 months in advance")
           end
   end
 
