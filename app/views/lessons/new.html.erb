@@ -6,8 +6,7 @@
     <% end %>
 <% end %>
 
-<%= form_with model: @lesson, local:true do |form| %>
-    
+<%= form_with model: @lesson, local:true do |form| %>  
     <div> 
         <%= form.label :language_id, "Language"%>
         <%= form.select(:language_id, @languages.map {|l| [l.name, l.id]}) %>   

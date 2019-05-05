@@ -53,8 +53,7 @@ class LessonsController < ApplicationController
     end
 
     def set_lesson
-        id = params[:id]
-        @lesson = Lesson.find(id)
+        @lesson = Lesson.find(params[:id])
     end
 
     def lesson_params
