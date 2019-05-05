@@ -1,24 +1,24 @@
-<h1> My Lessons</h1>
 
-<% @lessons.each do |lesson| %>
-    <div class="lessons_card">
-        <p><%= lesson.lesson_date %></p> 
-        <p><%= lesson.language.name %></p> 
-        <p><%= lesson.difficulty %></p> 
-        <%= link_to "edit", edit_lesson_path(lesson.id)%>
-    </div>
+    <h1> My Upcoming Lessons</h1>
+        <% @lessons.each do |lesson| %>
 
+            <div class="lessons_card">
+            <% if lesson.lesson_date >= Date.today %>
+                <p><%= lesson.lesson_date %></p> 
+                <p><%= lesson.language.name %></p> 
+                <p><%= lesson.difficulty %></p> 
+                <%= link_to "edit", edit_lesson_path(lesson.id)%>
+                <% end %>
+            </div>
+        <% end %>
 
-<% end %>
-
-<h2> Past Lessons </h2>
-
-<% @lessons.each do |lesson| %>
-    <div class="lessons_card">
-        <p><%= lesson.lesson_date %></p> 
-        <p><%= lesson.language.name %></p> 
-        <p><%= lesson.difficulty %></p> 
-    </div>
-
-
-<% end %>
+    <h2> Past Lessons </h2>
+        <% @lessons.each do |lesson| %>
+            <div class="lessons_card">
+            <% if lesson.lesson_date < Date.today %>
+                <p><%= lesson.lesson_date %></p> 
+                <p><%= lesson.language.name %></p> 
+                <p><%= lesson.difficulty %></p> 
+                <% end %>
+            </div>
+        <% end %>
