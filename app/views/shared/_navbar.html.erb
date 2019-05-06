@@ -5,9 +5,12 @@
     <nav>
         <% if user_signed_in? %>
             <ul class="nav justify-content-end">
+            <% if current_user.role == "teacher" %>
                 <li class="nav-item">
                     <%= link_to 'New Lesson', new_lesson_path, class: "nav-link" %>
                 </li>
+                <% end %>
+                
                 <li class="nav-item">
                     <%= link_to 'My Lessons', lessons_path, class: "nav-link" %>
                 </li>
