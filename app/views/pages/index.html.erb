@@ -1,7 +1,9 @@
-<%= render 'login' if !user_signed_in? %>
-
-<h2> Join the Lang.Up Crew</h2>
-
-<h3>Find a Teacher near you and start learning a language today!<h3>
-
-<%= link_to "Create Account", new_user_registration_path %>
+<div class="background-container">
+    <div class="">
+        <h2> Join the Lang.Up Crew</h2> 
+        <h3>Find a Teacher near you and start learning a language today!<h3>
+        <div>
+            <%= link_to "Create Account", new_user_registration_path, class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>

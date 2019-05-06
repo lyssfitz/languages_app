@@ -12,10 +12,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    UsersLanguage.create(
-      user_id: current_user.id,
-      language_id: params[:user][:languages]
-    )
+    unless !current_user
+      UsersLanguage.create(
+        user_id: current_user.id,
+        language_id: params[:user][:languages]
+      )
+    end
   end
 
   # GET /resource/edit
