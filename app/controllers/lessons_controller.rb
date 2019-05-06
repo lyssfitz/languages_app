@@ -48,7 +48,7 @@ class LessonsController < ApplicationController
     private
 
     def set_languages
-        @languages = current_user.languages
+        @language = current_user.languages
     end
 
     def set_difficulty
