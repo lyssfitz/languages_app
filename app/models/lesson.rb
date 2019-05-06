@@ -19,9 +19,9 @@ class Lesson < ApplicationRecord
   end
 
   def lesson_time_must_be_within_timeframe
-    unless ("08:00"..."20:00").include?(lesson_time.strftime("%H:%M"))
+    if lesson_time.present? && !("08:00"..."20:00").include?(lesson_time.strftime("%H:%M"))
       errors.add(:lesson_time, "must be between 08:00 and 20:00")
-          end
+    end
   end
 
   def price_must_be_within_range
