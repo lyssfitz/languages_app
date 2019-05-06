@@ -8,4 +8,10 @@ body {
     background: url('world_globe.png') no-repeat center center;
     background-size: cover;
     height: 800px;
+
+    .align-to-center {
+        padding-top: 230px;
+        color: #ffffff;
+        font-weight: 800;
+    }
 }
