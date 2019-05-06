@@ -12,15 +12,20 @@
     <p><%= @lesson.city %> </p>
     <p><%= @lesson.state + " " + @lesson.postcode%> </p>
     <p><%= @lesson.country %> </p>
+    <p><%= @lesson.comments[0].body %> </p>
 </div>
 
 <%= form_with model: @comment, local:true do |form| %>
     
     <h2> Comments </h2>
     <p> Type any questions or comments about this lesson here.</p>
+    <div>
+    <%= @lesson.id %>
+    <%= form.hidden_field :lesson_id, value: @lesson.id %>
+    </div>
         <div> 
             <%= form.label :comments %>
-            <%= form.text_area :comments, placeholder: "Type comments or questions here" %>
+            <%= form.text_area :body, placeholder: "Type comments or questions here" %>
         </div> 
 
         <div>

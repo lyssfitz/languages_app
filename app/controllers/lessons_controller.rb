@@ -30,7 +30,8 @@ class LessonsController < ApplicationController
     end
 
     def show
-        
+        @comment = Comment.new
+    
     end
 
     def edit 
@@ -43,6 +44,10 @@ class LessonsController < ApplicationController
 
     def destroy 
         
+    end
+
+    def explore
+
     end
 
     private
