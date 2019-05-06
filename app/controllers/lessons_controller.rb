@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
-    before_action :set_user_lesson, only: [:edit, :update, :destroy]
+    before_action :authorise_user, only: [:edit, :update, :destroy]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
 
@@ -57,9 +57,8 @@ class LessonsController < ApplicationController
         @lesson = Lesson.find(params[:id])
     end
 
-    def set_user_lesson
-        @lesson = Lesson.where(user_id: current_user.id, id: params[:id]).first
-        if !@lesson
+    def authorise_user
+        unless @lesson.user_id == current_user.id
             redirect_to lessons_path
         end
     end
