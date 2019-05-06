@@ -1,12 +1,13 @@
 class LessonsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+    before_action :authorise_user, only: [:edit, :update, :destroy]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
 
 
     def index
-        @lessons = Lesson.all
+        @lessons = current_user.lessons
     end
 
     def create
@@ -56,7 +57,13 @@ class LessonsController < ApplicationController
         @lesson = Lesson.find(params[:id])
     end
 
+    def authorise_user
+        unless @lesson.user_id == current_user.id
+            redirect_to lessons_path
+        end
+    end
+
     def lesson_params
-        params.require(:lesson).permit(:language_id, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty )
+        params.require(:lesson).permit(:language_id, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty)
     end 
 end
