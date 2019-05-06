@@ -15,11 +15,15 @@
 </div>
 
 <%= form_with model: @comment, local:true do |form| %>
-    <div> 
+    
     <h2> Comments </h2>
     <p> Type any questions or comments about this lesson here.</p>
-        <%= form.label :comments %>
-        <%= form.text_area :comments, placeholder: "Type comments or questions here" %>
-    </div> 
+        <div> 
+            <%= form.label :comments %>
+            <%= form.text_area :comments, placeholder: "Type comments or questions here" %>
+        </div> 
 
+        <div>
+            <%= form.submit %>
+        </div>
     <% end %>

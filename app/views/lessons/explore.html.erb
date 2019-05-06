@@ -1,0 +1,15 @@
+<h1> Find Your Lesson </h1>
+        <% @lessons.each do |lesson| %>
+            <% if (lesson.language_id == current_user.languages) && (lesson.lesson_date >= Date.today)%>
+                <div class="lessons_card">
+                
+                    <p><%= lesson.lesson_date %></p> 
+                    <p><%= lesson.language.name %></p> 
+                    <p><%= lesson.difficulty %></p> 
+                    <%= link_to "lesson", lesson_path(lesson.id)%>
+                    
+                </div>
+            <% end %>
+        <% end %>
+
+        <% end %>

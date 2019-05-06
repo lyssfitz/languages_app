@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post "/lessons", to: "lessons#create"
   get "/lessons/new", to: "lessons#new", as: "new_lesson"
   get "/lessons/:id", to: "lessons#show", as: "lesson"
+  # post "/lessons:id", to: "lessons#show"
   put "/lessons/:id", to: "lessons#update"
   patch "/lessons/:id", to: "lessons#update"
   delete "/lessons/:id", to: "lessons#destroy"
