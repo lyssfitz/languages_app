@@ -20,9 +20,9 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
-                    <div class="dropdown-menu" id="dropdown-menu">
+                    <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="navbarDropdown">
                         <%= link_to "My Profile", profile_path, class: "dropdown-item" %>
-                        <%= link_to "Settings", registration_path(current_user), class: "dropdown-item"  %>
+                        <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item"  %>
                         <div class="dropdown-divider"></div>
                         <%= link_to "Log out", destroy_user_session_path, method:'delete', class: "dropdown-item" %>                    
                     </div>
@@ -30,9 +30,9 @@
             </ul> 
         <% else %>   
            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <div class="form-row navbar-right align-items-center">
+                <div class="form-row">
                     <div class="col-sm-4 my-1">
-                    <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+                    <%= f.label :email, "Username", class:"sr-only" %>
                     <div class="input-group">
                         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
                     </div>
