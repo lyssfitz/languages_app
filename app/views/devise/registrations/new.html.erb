@@ -27,8 +27,8 @@
       </div>
 
       <div class="form-group field">
-        <%= f.label :date_of_birth, "Date of Birth" %>
-        <%= f.date_field :date_of_birth, class: "form-control" %>
+        <%= f.label :date_of_birth, "Date of Birth:" %>
+        <%= f.date_field :date_of_birth, class: "" %>
       </div>
 
       <div class="form-group field">
@@ -47,11 +47,11 @@
         <% end %>
       </div>
 
-      <div class="form-check">
+      <div class="custom-control custom-radio">
         <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
         <% @languages.each do |option| %>
-            <%= f.label :languages, option.name, class: "form-check-label"  %>
-            <%= f.radio_button :languages, option.id, class: "form-check-input" %>
+            <%= f.label :languages, option.name, class: "btn btn-outline-dark"  %>
+            <%= f.radio_button :languages, option.id, class: "custom-control-input" %>
         <% end %>
       </div>
 
@@ -71,7 +71,7 @@
       </div>
 
     <div class="actions">
-      <%= f.submit "Create Account" %>
+      <%= f.submit "Create Account", class: "btn btn-square btn-dark" %>
     </div>
   <% end %>
 </div>

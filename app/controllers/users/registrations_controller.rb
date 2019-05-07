@@ -3,18 +3,18 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :set_listings
+  before_action :view_variables
 
   # GET /resource/sign_up
   def new
     super
-    set_listings = true
-    @disable_nav
+    @disable_nav = true
   end
 
   # POST /resource
   def create
     super
+
     unless !current_user
       UsersLanguage.create(
         user_id: current_user.id,
@@ -28,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def set_listings
+  def view_variables
     @city = "Sydney, Australia"
     @languages = Language.all
     @gender = User.genders.keys
@@ -57,15 +57,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, :first_name)
-  end
+  # def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:fist_name, :last_name, :date_of_birth, :role, :language, :gender])
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
+  # def user_params
+  #   params.require(:user).permit(:first_name, :last_name, :date_of_birth, )
+  # end 
 
   def after_sign_up_path_for(resource)
     super(resource)
@@ -77,4 +80,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super(resource)
     home_path
   end
+
 end
