@@ -2,7 +2,8 @@ class LessonsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
     before_action :authorise_user, only: [:edit, :update, :destroy]
-    before_action :classify_user, only: [:new, :edit, :update]
+    before_action :authorise_teacher, only: [:new, :edit, :update]
+    before_action :authorise_student, only: [:explore]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
 
@@ -72,8 +73,14 @@ class LessonsController < ApplicationController
         end
     end
 
-    def classify_user
-        if current_user.role == "student"
+    def authorise_teacher
+        if current_user.role != "teacher"
+            redirect_to lessons_path
+        end
+    end
+
+    def authorise_student
+        if current_user.role != "student"
             redirect_to lessons_path
         end
     end
