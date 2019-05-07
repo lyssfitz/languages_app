@@ -12,8 +12,13 @@
     <p><%= @lesson.city %> </p>
     <p><%= @lesson.state + " " + @lesson.postcode%> </p>
     <p><%= @lesson.country %> </p>
-        
+    <% if current_user.role == "teacher" %>
+        <p><%= link_to "Edit", edit_lesson_path(@lesson.id)%></p>
+    <% else %>
+        <button> Buy Ticket $ <%= number_with_precision(@lesson.price / 100.0, precision: 2 ) %> </button>  
+    <% end %>      
 </div>
+
 
 
 <%= form_with model: @comment, local:true do |form| %>
