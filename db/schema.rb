@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2019_05_06_045923) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "user_languages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_user_languages_on_language_id"
+    t.index ["user_id"], name: "index_user_languages_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

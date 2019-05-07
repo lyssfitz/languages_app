@@ -1,5 +1,6 @@
 
     <h1> My Upcoming Lessons</h1>
+    <% lesson_count = 0%>
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date >= Date.today %>
                 <div class="lessons_card">
@@ -8,12 +9,18 @@
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
                     <%= link_to "edit", edit_lesson_path(lesson.id)%>
-                    
                 </div>
+                <% lesson_count += 1%>
             <% end %>
         <% end %>
 
+        <% if lesson_count == 0%>
+            <p>You do not have any upcoming lessons! </p>
+        <% end%>
+        
+
     <h2> Past Lessons </h2>
+    <% lesson_count = 0%>
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date < Date.today %>
                 <div class="lessons_card">
@@ -23,5 +30,9 @@
                     <p><%= lesson.difficulty %></p> 
                     
                 </div>
+                <% lesson_count += 1%>
             <% end %>
         <% end %>
+        <% if lesson_count == 0%>
+            <p>You do not have any previous lessons! </p>
+        <% end%>

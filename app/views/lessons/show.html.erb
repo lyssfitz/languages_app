@@ -1,0 +1,41 @@
+<h1><%= @lesson.language.name %> Lesson</h1>
+<div>
+    <h2>Lesson Details</h2>
+    <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
+    <p>Date: <%= @lesson.lesson_date %></p> 
+    <p>Time: <%= @lesson.lesson_time %></p> 
+    <p>Ticket Price: $<%= @lesson.price%>
+    <p>Lesson Focus: <%= @lesson.body %></p> 
+    <p>Difficulty: <%= @lesson.difficulty %></p> 
+    <p>Location: </p>
+    <p><%= @lesson.street %> </p>
+    <p><%= @lesson.city %> </p>
+    <p><%= @lesson.state + " " + @lesson.postcode%> </p>
+    <p><%= @lesson.country %> </p>
+        
+</div>
+
+
+<%= form_with model: @comment, local:true do |form| %>
+    
+    <h2> Comments </h2>
+    <p> Type any questions or comments about this lesson here.</p>
+    <div>
+
+    <%= form.hidden_field :lesson_id, value: @lesson.id %>
+    </div>
+        <div>
+        <% @lesson.comments.each do |comment| %> 
+        <p><%= comment.body%></p>
+        <% end %>
+        </div>
+        <div> 
+
+            <%= form.label :comments %>
+            <%= form.text_area :body, placeholder: "Type comments or questions here" %>
+        </div> 
+
+        <div>
+            <%= form.submit %>
+        </div>
+    <% end %>
