@@ -44,7 +44,7 @@ class LessonsController < ApplicationController
     end
 
     def destroy 
-        
+
     end
 
     def explore
