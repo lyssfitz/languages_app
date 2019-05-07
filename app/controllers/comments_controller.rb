@@ -1,15 +1,13 @@
 class CommentsController < ApplicationController
 
     def create 
-        @comment = Comment.new(comment_params)
-        @comment.user_id = current_user.id
-        byebug
-        if @comment.save 
-            redirect_to lesson_path(@comment.lesson_id)
-        else
-            render plain: "NOOOOOOOOOO!!!!"
-        end
-
+            @comment = Comment.new(comment_params)
+            @comment.user_id = current_user.id
+            if @comment.save 
+                redirect_to lesson_path(@comment.lesson_id)
+            else
+                render plain: "NOOOOOOOOOO!!!!"
+            end
     end
 
     private

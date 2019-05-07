@@ -12,8 +12,11 @@
     <p><%= @lesson.city %> </p>
     <p><%= @lesson.state + " " + @lesson.postcode%> </p>
     <p><%= @lesson.country %> </p>
-    <p><%= @lesson.comments[0].body %> </p>
+    <% @lesson.comments.each do |comment| %> 
+        <p><%=comment.body%></p>
+    <% end %>
 </div>
+
 
 <%= form_with model: @comment, local:true do |form| %>
     
