@@ -3,49 +3,27 @@
         <a class="navbar-brand mb-0 h1" href="<%= home_path %>">Lang.Up</a>
     </div>
     <div>
-        <% if user_signed_in? %>
-            <ul class="nav">
-            <ul class="nav justify-content-end">
-            
-                <li class="nav-item">
+        <ul class="nav">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
                 <% if current_user.role == "teacher" %>
                     <%= link_to 'New Lesson', new_lesson_path, class: "nav-link" %>
-                    <% else %>
+                <% else %>
                     <%= link_to 'Explore', lessons_path, class: "nav-link" %>
-                    <% end %>
-                </li>
-        
-                <li class="nav-item">
-                    <%= link_to 'My Lessons', lessons_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
-                    <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <%= link_to "My Profile", profile_path, class: "dropdown-item" %>
-                        <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item"  %>
-                        <div class="dropdown-divider"></div>
-                        <%= link_to "Log out", destroy_user_session_path, method:'delete', class: "dropdown-item" %>                    
-                    </div>
-                </li>
-            </ul> 
-        <% else %>   
-           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <div class="form-row">
-                    <div class="col-sm-4 my-1">
-                    <%= f.label :email, "Username", class:"sr-only" %>
-                    <div class="input-group">
-                        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
-                    </div>
-                    </div>
-                    <div class="col-sm-4 my-1">
-                    <%= f.label :password, "Password", class: "sr-only" %>
-                    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "form-control" %>
-                    </div>
-                    <div class="col-auto my-1">
-                    <%= f.submit "Log in", class: "btn btn-outline-dark" %>
-                    </div>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'My Lessons', lessons_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+                <div class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</div>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <%= link_to "My Profile", profile_path, class: "dropdown-item" %>
+                    <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item"  %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to "Log out", destroy_user_session_path, method:'delete', class: "dropdown-item" %>                    
                 </div>
-            <% end %>
-        <% end %>
+            </li>
+        </ul>   
     </div>
 </nav>
