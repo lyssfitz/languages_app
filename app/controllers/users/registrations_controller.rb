@@ -3,10 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :set_listings
 
   # GET /resource/sign_up
   def new
     super
+    set_listings = true
+    @disable_nav
   end
 
   # POST /resource
@@ -23,7 +26,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
+  end
 
+  def set_listings
+    @city = "Sydney, Australia"
+    @languages = Language.all
+    @gender = User.genders.keys
+    @roles = User.roles.keys
   end
 
   # PUT /resource
@@ -48,9 +57,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, :first_name)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

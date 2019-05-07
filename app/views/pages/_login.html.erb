@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <div>
+        <a class="navbar-brand mb-0 h1" href="<%= home_path %>">Lang.Up</a>
+    </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-row">
+            <div class="col-sm-4 my-1">
+            <%= f.label :email, "Username", class:"sr-only" %>
+            <div class="input-group">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
+            </div>
+            </div>
+            <div class="col-sm-4 my-1">
+            <%= f.label :password, "Password", class: "sr-only" %>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "form-control" %>
+            </div>
+            <div class="col-auto my-1">
+            <%= f.submit "Log in", class: "btn btn-outline-dark" %>
+            </div>
+        </div>
+    <% end %>
+</nav>
