@@ -47,7 +47,9 @@ class LessonsController < ApplicationController
     end
 
     def explore
-
+        @language_ids = current_user.users_languages.pluck(:language_id)
+        @lessons = Lesson.where(language_id: @language_ids)
+        
     end
 
     private
