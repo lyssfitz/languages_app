@@ -20,8 +20,7 @@ class LessonsController < ApplicationController
             render "new"
         else
             redirect_to lessons_path    
-        end
-        
+        end 
     end
 
     def new
