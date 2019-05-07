@@ -13,4 +13,6 @@ class User < ApplicationRecord
   enum role: {student: 0, teacher: 1} 
   has_one_attached :picture
   validates :first_name, :last_name, :date_of_birth, :role, :languages, presence: true
+
+  
 end
