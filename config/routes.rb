@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   get "/lessons/:id/edit", to: "lessons#edit", as: "edit_lesson"
   get '/', to: 'pages#index', as: 'home'
   get '/profile', to:'pages#show', as: 'profile'
+  post "/orders", to: "orders#stripe"
+  get "/orders/success", to: "orders#success"
 end
  

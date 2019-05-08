@@ -8,7 +8,10 @@
                     <p><%= lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
-                    <%= link_to "edit", edit_lesson_path(lesson.id)%>
+                    <p> <%= link_to "View Details", lesson_path(lesson.id)%></p>
+                        <% if current_user.role == "teacher" %>
+                            <p><%= link_to "Edit", edit_lesson_path(lesson.id)%></p>
+                        <% end %>
                 </div>
                 <% lesson_count += 1%>
             <% end %>
@@ -19,6 +22,14 @@
         <% end%>
         
 
+        <% if current_user.role == "teacher" %>
+        <p><%= link_to "Create New Lesson", new_lesson_path%></p>
+
+        <% elsif current_user.role == "student"%>
+
+        <p><%= link_to "Join a Lesson", explore_path%></p>
+        <% end %>
+
     <h2> Past Lessons </h2>
     <% lesson_count = 0%>
         <% @lessons.each do |lesson| %>
@@ -28,7 +39,7 @@
                     <p><%= lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
-                    
+                    <%= link_to "View Details", lesson_path(lesson.id)%>
                 </div>
                 <% lesson_count += 1%>
             <% end %>

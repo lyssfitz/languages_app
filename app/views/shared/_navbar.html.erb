@@ -9,7 +9,7 @@
                 <% if current_user.role == "teacher" %>
                     <%= link_to 'New Lesson', new_lesson_path, class: "nav-link" %>
                 <% else %>
-                    <%= link_to 'Explore', lessons_path, class: "nav-link" %>
+                    <%= link_to 'Explore', explore_path, class: "nav-link" %>
                 <% end %>
             </li>
             <li class="nav-item">
