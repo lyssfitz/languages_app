@@ -14,3 +14,20 @@ if Language.count == 0
         puts "#{name} created"
     end
 end
+
+if User.count == 0
+    for i in 1..50
+        User.create(
+            first_name: Faker::Name.first_name,
+            last_name: Faker::Name.last_name,
+            date_of_birth: Faker::Date.birthday(18, 65),
+            role: rand(2),
+            gender: rand(2),
+            email: Faker::Internet.email,
+            password: "password",
+            city: "Sydney",
+            biography: Faker::Lorem.paragraph,
+        ).language_ids = [rand(1..12)]
+        puts "#{i} created"
+    end
+end

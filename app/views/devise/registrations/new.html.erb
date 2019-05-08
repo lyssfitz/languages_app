@@ -2,6 +2,7 @@
 <div class="registration-form">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form-horizontal") do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
+
       <div class="form-row">
         <div class="form-group col-md-6">
             <%= f.text_field :first_name, placeholder: "First Name", autofocus: true, class: "form-control" %>
@@ -49,9 +50,9 @@
 
       <div class="custom-control custom-radio">
         <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
-        <% @languages.each do |option| %>
-            <%= f.label :languages, option.name, class: "btn btn-outline-dark"  %>
-            <%= f.radio_button :languages, option.id, class: "custom-control-input" %>
+        <% @languages.each do |language| %>
+          <%= f.label :languages, language.name %>
+          <%= f.radio_button :languages, language.id %>
         <% end %>
       </div>
 
