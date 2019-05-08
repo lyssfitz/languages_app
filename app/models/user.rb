@@ -13,8 +13,13 @@ class User < ApplicationRecord
   enum role: {student: 0, teacher: 1} 
   has_one_attached :picture
   validates :first_name, :last_name, :date_of_birth, :role, presence: true
+  validate :age_checker
+  validates_format_of :first_name, :last_name, with: /^[\A-\z]+$/i, multiline: true, message: "must be a letter"
 
   def age_checker
-    ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
+    user_age = ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
+    if user_age < 18
+      errors.add(:lesson_date, "You must be over 18 to sign up")
+    end
   end
 end
