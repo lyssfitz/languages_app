@@ -11,8 +11,4 @@ class PagesController < ApplicationController
         #     operator_dashboard
         # end
     end
-
-    def home
-        render plain: "homepage Create lesson, explore lessons, my lessons, edit profile"
-    end
 end

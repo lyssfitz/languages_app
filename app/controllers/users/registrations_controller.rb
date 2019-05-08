@@ -14,7 +14,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-
     unless !current_user
       UsersLanguage.create(
         user_id: current_user.id,
@@ -26,10 +25,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
+    @language = current_user.languages
+  end
+
+  def update
+    current_user.languages.update(
+      language_id: params[:user][:languages]
+    )
   end
 
   def view_variables
-    @city = "Sydney, Australia"
+    @city = "Sydney"
     @languages = Language.all
     @gender = User.genders.keys
     @roles = User.roles.keys
