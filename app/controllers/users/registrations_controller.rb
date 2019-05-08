@@ -14,7 +14,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-
     unless !current_user
       UsersLanguage.create(
         user_id: current_user.id,

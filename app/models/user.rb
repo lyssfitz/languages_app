@@ -14,5 +14,7 @@ class User < ApplicationRecord
   has_one_attached :picture
   validates :first_name, :last_name, :date_of_birth, :role, :languages, presence: true
 
-  
+  def age_checker
+    ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
+  end
 end

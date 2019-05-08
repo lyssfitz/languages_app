@@ -60,7 +60,7 @@
   <% end %>
 
   <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
-  <% Language.all.each do |option| %>
+  <% @languages.each do |option| %>
     <div class="field">
       <%= f.label :languages, option.name  %>
       <%= f.radio_button :languages, option.id  %>
@@ -70,6 +70,11 @@
   <div class="field">
     <%= f.label :city, "City:" %>
     <%= f.select :city, [["Sydney, Australia"]]  %>
+  </div>
+
+  <div class="form-group custom-file field">
+    <%= f.label :picture, class: "custom-file-label" %>
+    <%= f.file_field :picture, accept: "image/png, image/gif, image/jpeg, image/jpg", class: "custom-file-input" %>
   </div>
 
   <div class="field">
