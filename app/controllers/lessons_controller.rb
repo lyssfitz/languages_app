@@ -31,7 +31,20 @@ class LessonsController < ApplicationController
 
     def show
         @comment = Comment.new
-    
+        stripe_session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            line_items: [{
+              name: @lesson.language.name,
+              description: @lesson.body,
+              amount: @lesson.price,
+              currency: 'aud',
+              quantity: 1,
+            }],
+            success_url: 'http://localhost:3000/success',
+            cancel_url: 'http://localhost:3000/cancel',
+          )
+        @stripe_session_id = stripe_session.id
+         
     end
 
     def edit 
@@ -39,11 +52,13 @@ class LessonsController < ApplicationController
     end
 
     def update 
-        
+        @lesson.update(lesson_params)
+        redirect_to @lesson
     end
 
     def destroy 
-
+        @lesson.destroy
+        redirect_to lessons_path
     end
 
     def explore

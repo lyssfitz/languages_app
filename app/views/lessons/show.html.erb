@@ -14,10 +14,28 @@
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
         <p><%= link_to "Edit", edit_lesson_path(@lesson.id)%></p>
+        <p><%= link_to "Delete", @lesson, method: :delete %></p>
     <% else %>
-        <button> Buy Ticket $ <%= number_with_precision(@lesson.price / 100.0, precision: 2 ) %> </button>  
-    <% end %>      
-</div>
+        <button id="stripePayment"> Buy Ticket $ <%= number_with_precision(@lesson.price / 100.0, precision: 2 ) %> </button>  
+
+        
+    <% end %>   
+    </div>
+    <script>
+        document.getElementById("stripePayment").addEventListener("click", function() {
+            var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
+
+              stripe.redirectToCheckout({
+      sessionId: "<%= @stripe_session_id %>"
+    })
+    .then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    });
+});
+    </script>   
+
 
 
 

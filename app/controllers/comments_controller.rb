@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
             if @comment.save 
                 redirect_to lesson_path(@comment.lesson_id)
             else
-                byebug
                 render plain: "NOOOOOOOOOO!!!!"
             end
     end
