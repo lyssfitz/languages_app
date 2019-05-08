@@ -31,3 +31,24 @@ if User.count == 0
         puts "#{i} created"
     end
 end
+
+User.all.each do |user|
+    if user.role == "teacher"
+
+        Lesson.create!(
+            user_id: user.id,
+            language_id: user.languages.ids[0],
+            body: Faker::Lorem.paragraph,
+            lesson_date: Time.at(("2019-08-09".to_f - "2019-02-09".to_f)*rand + "2019-02-09".to_f),
+            lesson_time: "18:00:00",
+            street: "20 Bond Street",
+            city: "Sydney",
+            country: "Australia",
+            postcode: "2000",
+            price: 10,
+            max_students: rand(10..25),
+            difficulty: rand(3)
+        )
+        puts "#{user.first_name} created a lesson"
+    end
+end

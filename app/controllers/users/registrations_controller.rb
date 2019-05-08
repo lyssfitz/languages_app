@@ -29,9 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    current_user.languages.update(
-      language_id: params[:user][:languages]
-    )
+
   end
 
   def view_variables

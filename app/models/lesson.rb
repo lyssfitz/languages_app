@@ -6,6 +6,8 @@ class Lesson < ApplicationRecord
   validates :language, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty, presence: true 
   validate :lesson_date_must_not_be_in_the_past, :lesson_date_must_be_within_12_months, :price_must_be_within_range, :lesson_time_must_be_within_timeframe, :max_students_must_be_within_range
 
+  private 
+  
   def lesson_date_must_not_be_in_the_past
     if  lesson_date < Date.today
             errors.add(:lesson_date, "must not be in the past")
