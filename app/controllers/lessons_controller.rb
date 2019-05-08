@@ -39,11 +39,16 @@ class LessonsController < ApplicationController
               amount: @lesson.price,
               currency: 'aud',
               quantity: 1,
-            }],
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/cancel',
-          )
-        @stripe_session_id = stripe_session.id
+              }],
+              payment_intent_data: {
+                  metadata: {
+                      lesson_id: @lesson.id
+                  }
+              },
+              success_url: 'http://localhost:3000/orders/success',
+              cancel_url: 'http://localhost:3000/cancel',
+            )
+          @stripe_session_id = stripe_session.id
          
     end
 
