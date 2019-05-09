@@ -3,7 +3,7 @@
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date >= Date.today %>
                 <div class="card border border-dark rounded">
-                    <p><%= lesson.lesson_date %></p> 
+                    <p><%= l lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
                     <p><%= link_to "View Details", lesson_path(lesson.id) %></p>
