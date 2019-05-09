@@ -4,59 +4,68 @@
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
     <p>Date: <%= @lesson.lesson_date %></p> 
     <p>Time: <%= @lesson.lesson_time %></p> 
-    <p>Ticket Price: $<%= @lesson.price %>
+    <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
     <p>Lesson Focus: <%= @lesson.body %></p> 
     <p>Difficulty: <%= @lesson.difficulty %></p> 
     <p>Location: </p>
     <p><%= @lesson.street %> </p>
-    <p><%= @lesson.city %> </p>
-    <p><%= @lesson.state %> <%= @lesson.postcode %> </p>
+    <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
-        <p><%= link_to "Edit", edit_lesson_path(@lesson.id)%></p>
-        <p><%= link_to "Delete", @lesson, method: :delete %></p>
+        <%= link_to "Edit", edit_lesson_path(@lesson.id)%>
+        <%= link_to "Delete", @lesson, method: :delete %>
     <% else %>
-        <button id="stripePayment"> Buy Ticket $ <%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
+        <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>   
-    </div>
-    <script>
-        document.getElementById("stripePayment").addEventListener("click", function() {
-            var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
-
-              stripe.redirectToCheckout({
-      sessionId: "<%= @stripe_session_id %>"
-    })
-    .then(function (result) {
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `result.error.message`.
-    });
-});
-    </script>   
-
-
-
-
+</div>
+   
 <%= form_with model: @comment, local:true do |form| %>
-    
     <h2> Comments </h2>
     <p> Type any questions or comments about this lesson here.</p>
     <div>
-
-    <%= form.hidden_field :lesson_id, value: @lesson.id %>
+        <%= form.hidden_field :lesson_id, value: @lesson.id %>
+    </div>   
+    <div class="comment-box">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Comment</span>
+            </div>
+                <%= form.text_area :body, placeholder: "Type comments or questions here", class: "form-control" %>
+            </div>
+        </div>
+    <div>
+    <div> 
+        <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
     </div>
-        <div>
-        <% @lesson.comments.each do |comment| %> 
-        <p><%= comment.body%></p>
+<% end %>
+<div class="user-comments">
+    <h4>All Comments:</h4>
+    <div class="list-group">
+        <% @comments.each do |c| %>
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%= c.user.first_name %> <%= c.user.last_name %></h5>
+                    <small class="text-muted"><%= c.body %></small>
+                    <p class="mb-1"></p>
+                    <small class="text-muted"><%= c.created_at %></small>
+                </div>
+            </a>
         <% end %>
-        </div>
-        <div> 
+    </div>
+</div>
 
-            <%= form.label :comments %>
-            <%= form.text_area :body, placeholder: "Type comments or questions here" %>
-        </div> 
 
-        <div>
-            <%= form.submit %>
-        </div>
-    <% end %>
+<script>
+    document.getElementById("stripePayment").addEventListener("click", function() {
+        var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
+
+        stripe.redirectToCheckout({
+            sessionId: "<%= @stripe_session_id %>"
+        })
+        .then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+        });
+    });
+</script> 

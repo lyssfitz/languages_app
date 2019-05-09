@@ -43,6 +43,7 @@ User.all.each do |user|
             lesson_time: "18:00:00",
             street: "20 Bond Street",
             city: "Sydney",
+            state: "NSW",
             country: "Australia",
             postcode: "2000",
             price: 10,
