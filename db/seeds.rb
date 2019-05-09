@@ -35,7 +35,7 @@ end
 User.all.each do |user|
     if user.role == "teacher"
 
-        Lesson.create!(
+        lesson = Lesson.new(
             user_id: user.id,
             language_id: user.languages.ids[0],
             body: Faker::Lorem.paragraph,
@@ -43,12 +43,15 @@ User.all.each do |user|
             lesson_time: "18:00:00",
             street: "20 Bond Street",
             city: "Sydney",
+            state: "NSW",
             country: "Australia",
             postcode: "2000",
             price: 10,
             max_students: rand(10..25),
             difficulty: rand(3)
         )
+
+        lesson.save(validate: false)
         puts "#{user.first_name} created a lesson"
     end
 end
