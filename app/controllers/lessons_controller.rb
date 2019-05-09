@@ -7,7 +7,6 @@ class LessonsController < ApplicationController
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
 
-
     def index
         @lessons = current_user.lessons
     end
@@ -26,20 +25,21 @@ class LessonsController < ApplicationController
 
     def new
         @lesson = Lesson.new
-
     end
 
     def show
         @comment = Comment.new
+        @comments = Comment.all.where(lesson_id: params[:id])
+        price = @lesson.price * 100
         stripe_session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
             customer_email: current_user.email,
             line_items: [{
-              name: @lesson.language.name,
-              description: @lesson.body,
-              amount: @lesson.price,
-              currency: 'aud',
-              quantity: 1,
+                name: @lesson.language.name,
+                description: @lesson.body,
+                amount: price,
+                currency: 'aud',
+                quantity: 1,
               }],
               payment_intent_data: {
                   metadata: {
@@ -51,7 +51,6 @@ class LessonsController < ApplicationController
               cancel_url: 'http://localhost:3000/cancel',
             )
           @stripe_session_id = stripe_session.id
-         
     end
 
     def edit 
@@ -71,7 +70,6 @@ class LessonsController < ApplicationController
     def explore
         @language_ids = current_user.users_languages.pluck(:language_id)
         @lessons = Lesson.where(language_id: @language_ids)
-        
     end
 
     private

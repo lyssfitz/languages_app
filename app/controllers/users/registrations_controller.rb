@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :view_variables
+  before_action :instant_variables_for_view
 
   # GET /resource/sign_up
   def new
@@ -25,14 +25,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
-    @language = current_user.languages
+    @language = current_user!.languages.ids[0]
   end
 
-  def update
-
-  end
-
-  def view_variables
+  def instant_variables_for_view
     @city = "Sydney"
     @languages = Language.all
     @gender = User.genders.keys

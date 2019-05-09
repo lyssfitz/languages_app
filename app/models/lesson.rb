@@ -1,6 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :user
   belongs_to :language
+  has_many :orders
   has_many :comments, dependent: :destroy
   has_many :orders
   enum difficulty: { easy:0, intermediate: 1, expert:2 }

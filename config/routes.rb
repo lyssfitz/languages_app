@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'users/registrations'}, path: '/', path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'create_account' }
+  devise_for :users, controllers: {registrations: 'users/registrations'}, path: '/', path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'create_account', edit: 'edit_account' }
 
   get "/lessons", to: "lessons#index", as: "lessons"
   post "/lessons", to: "lessons#create"
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   get '/profile', to:'pages#show', as: 'profile'
   post "/orders", to: "orders#stripe"
   get "/orders/success", to: "orders#success"
+  get "/orders/:id", to: "orders#show", as: "lesson_orders"
 end
  
