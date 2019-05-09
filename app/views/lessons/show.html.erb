@@ -4,21 +4,19 @@
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
     <p>Date: <%= @lesson.lesson_date %></p> 
     <p>Time: <%= @lesson.lesson_time %></p> 
-    <p>Ticket Price: $<%= @lesson.price%>
+    <p>Ticket Price: $<%= @lesson.price %>
     <p>Lesson Focus: <%= @lesson.body %></p> 
     <p>Difficulty: <%= @lesson.difficulty %></p> 
     <p>Location: </p>
     <p><%= @lesson.street %> </p>
     <p><%= @lesson.city %> </p>
-    <p><%= @lesson.state + " " + @lesson.postcode%> </p>
+    <p><%= @lesson.state %> <%= @lesson.postcode %> </p>
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
         <p><%= link_to "Edit", edit_lesson_path(@lesson.id)%></p>
         <p><%= link_to "Delete", @lesson, method: :delete %></p>
     <% else %>
-        <button id="stripePayment"> Buy Ticket $ <%= number_with_precision(@lesson.price / 100.0, precision: 2 ) %> </button>  
-
-        
+        <button id="stripePayment"> Buy Ticket $ <%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>   
     </div>
     <script>

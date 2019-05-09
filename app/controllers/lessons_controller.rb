@@ -31,13 +31,14 @@ class LessonsController < ApplicationController
 
     def show
         @comment = Comment.new
+        price = @lesson.price * 100
         stripe_session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
             customer_email: current_user.email,
             line_items: [{
               name: @lesson.language.name,
               description: @lesson.body,
-              amount: @lesson.price,
+              amount: price,
               currency: 'aud',
               quantity: 1,
               }],
