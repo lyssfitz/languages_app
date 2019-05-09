@@ -2,8 +2,8 @@
 <div>
     <h2>Lesson Details</h2>
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
-    <p>Date: <%= @lesson.lesson_date %></p> 
-    <p>Time: <%= @lesson.lesson_time %></p> 
+    <p>Date: <%= @lesson.lesson_date.strftime("%d %B, %Y") %></p> 
+    <p>Time: <%= @lesson.lesson_time.strftime("%I:%M %p") %></p> 
     <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
     <p>Lesson Focus: <%= @lesson.body %></p> 
     <p>Difficulty: <%= @lesson.difficulty %></p> 
@@ -19,39 +19,45 @@
         <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>   
 </div>
-   
-<%= form_with model: @comment, local:true do |form| %>
-    <h2> Comments </h2>
-    <p> Type any questions or comments about this lesson here.</p>
-    <div>
-        <%= form.hidden_field :lesson_id, value: @lesson.id %>
-    </div>   
-    <div class="comment-box">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Comment</span>
-            </div>
-                <%= form.text_area :body, placeholder: "Type comments or questions here", class: "form-control" %>
-            </div>
-        </div>
-    <div>
-    <div> 
-        <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
-    </div>
-<% end %>
-<div class="user-comments">
-    <h4>All Comments:</h4>
-    <div class="list-group">
-        <% @comments.each do |c| %>
-            <a class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><%= c.user.first_name %> </h5>
-                    <small class="text-muted"><%= c.body %></small>
-                    <p class="mb-1"></p>
-                    <small class="text-muted"><%= c.created_at %></small>
+
+<div class="form-layout"> 
+    <%= form_with model: @comment, local:true do |form| %>
+        <h2> Comments </h2>
+        <p> Type any questions or comments about this lesson here.</p>
+        <div>
+            <%= form.hidden_field :lesson_id, value: @lesson.id %>
+        </div>   
+        <div class="comment-box">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Comment</span>
                 </div>
-            </a>
-        <% end %>
+                    <%= form.text_area :body, placeholder: "Type comments or questions here", class: "form-control" %>
+                </div>
+            </div>
+        <div>
+        <div> 
+            <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
+        </div>
+    <% end %>
+    <div>
+        <h4>All Comments:</h4>
+        <div class="list-group">
+            <% if @comments.empty? %>
+                <p> There are no comments</p>
+            <% else %>
+                <% @comments.each do |c| %>
+                    <a class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><%= c.user.first_name %> </h5>
+                            <small class="text-muted"><%= c.body %></small>
+                            <p class="mb-1"></p>
+                            <small class="text-muted"><%= c.created_at %></small>
+                        </div>
+                    </a>
+                <% end %>
+            <% end %>
+        </div>
     </div>
 </div>
 
