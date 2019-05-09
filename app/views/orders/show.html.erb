@@ -3,7 +3,8 @@
 <div>
     <% @orders.each do |order|%>
         <div class="card border border-dark rounded">
-            <p><%= order.user.first_name %></p>
+            <p><%= order.user.first_name %> <%= order.user.last_name %></p>
+            <p><%= order.status %></p>
         </div>
     <% end %>
 </div>

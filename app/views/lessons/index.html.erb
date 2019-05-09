@@ -1,49 +1,41 @@
-
     <h1> My Upcoming Lessons</h1>
-    <% lesson_count = 0%>
+        <% lesson_count = 0 %>
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date >= Date.today %>
                 <div class="card border border-dark rounded">
-                
                     <p><%= lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
-                    <p> <%= link_to "View Details", lesson_path(lesson.id)%></p>
-                        <% if current_user.role == "teacher" %>
-                            <p><%= link_to "Edit", edit_lesson_path(lesson.id)%></p>
-                        <% end %>
+                    <p><%= link_to "View Details", lesson_path(lesson.id) %></p>
                 </div>
-                <% lesson_count += 1%>
+                <% lesson_count += 1 %>
             <% end %>
         <% end %>
 
-        <% if lesson_count == 0%>
+        <% if lesson_count == 0 %>
             <p>You do not have any upcoming lessons! </p>
         <% end%>
-        
 
         <% if current_user.role == "teacher" %>
-        <p><%= link_to "Create New Lesson", new_lesson_path%></p>
-
-        <% elsif current_user.role == "student"%>
-
-        <p><%= link_to "Join a Lesson", explore_path%></p>
+            <p><%= link_to "Create New Lesson", new_lesson_path%></p>
+        <% else %>   
+            <p><%= link_to "Join a Lesson", explore_path%></p>
         <% end %>
 
     <h2> Past Lessons </h2>
-    <% lesson_count = 0%>
+    <% lesson_count = 0 %>
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date < Date.today %>
                 <div class="lessons_card">
-                
                     <p><%= lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
-                    <%= link_to "View Details", lesson_path(lesson.id)%>
+                    <%= link_to "View Details", lesson_path(lesson.id) %>
                 </div>
-                <% lesson_count += 1%>
+                <% lesson_count += 1 %>
             <% end %>
         <% end %>
-        <% if lesson_count == 0%>
+
+        <% if lesson_count == 0 %>
             <p>You do not have any previous lessons! </p>
         <% end%>
