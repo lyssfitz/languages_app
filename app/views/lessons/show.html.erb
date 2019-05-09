@@ -2,7 +2,7 @@
 <div>
     <h2>Lesson Details</h2>
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
-    <p>Date: <%= @lesson.lesson_date %></p> 
+    <p>Date: <%= @lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
     <p>Time: <%= @lesson.lesson_time.strftime("%I:%M %p") %></p> 
     <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
     <p>Lesson Focus: <%= @lesson.body %></p> 
