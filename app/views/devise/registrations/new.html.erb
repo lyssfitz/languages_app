@@ -49,7 +49,7 @@
       </div>
 
       <div class="custom-control custom-radio">
-        <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
+        <p>What language(s) do you want to <span id="learn_teach">...</span>?</p>
         <% @languages.each do |language| %>
           <%= f.label :languages, language.name %>
           <%= f.radio_button :languages, language.id %>
@@ -72,9 +72,22 @@
       </div>
 
     <div class="actions">
-      <%= f.submit "Create Account", class: "btn btn-square btn-dark" %>
+      <%= f.submit "Create Account", class: "btn btn-outline-dark" %>
     </div>
   <% end %>
 </div>
 
 <p>Already have an account? <%= render "devise/shared/links" %> </p> 
+
+<script>
+  let student = document.getElementById("user_role_student")
+  let teacher = document.getElementById("user_role_teacher")
+
+  student.addEventListener("click",function(){
+    document.getElementById("learn_teach").innerHTML = "Learn";
+  });
+
+  teacher.addEventListener("click",function(){
+    document.getElementById("learn_teach").innerHTML = "Teach";
+  });
+</script>

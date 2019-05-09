@@ -14,14 +14,3 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
-let student = document.getElementById("user_role_student")
-let teacher = document.getElementById("user_role_teacher")
-
-student.addEventListener("click",function(){
-  document.getElementById("learn_teach").innerHTML = "Learn";
-});
-
-teacher.addEventListener("click",function(){
-  document.getElementById("learn_teach").innerHTML = "Teach";
-});
