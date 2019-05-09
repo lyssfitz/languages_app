@@ -1,12 +1,10 @@
 <h1> Find Your Lesson </h1>
         <% @lessons.each do |lesson| %>
-                <div class="lessons_card">
-                
+                <div class="card border border-dark rounded">
                     <p><%= lesson.lesson_date %></p> 
                     <p><%= lesson.language.name %></p> 
                     <p><%= lesson.difficulty %></p> 
                     <%= link_to "See Lesson Details", lesson_path(lesson.id)%>
-                    
                 </div>
         <% end %>
 
