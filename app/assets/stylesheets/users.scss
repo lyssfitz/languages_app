@@ -1,17 +1,17 @@
 body {
-    margin: 0px auto;
-    width: 100%;
-    text-align: center;
+  margin: 0px auto;
+  width: 100%;
+  text-align: center;
 }
 
 .background-container {
-    background: url('world_globe.png') no-repeat center center;
-    background-size: cover;
-    height: 800px;
+  background: url(image-path("world_globe.png")) no-repeat center center;
+  background-size: cover;
+  height: 800px;
 
-    .align-to-center {
-        padding-top: 230px;
-        color: #ffffff;
-        font-weight: 800;
-    }
+  .align-to-center {
+    padding-top: 230px;
+    color: #ffffff;
+    font-weight: 800;
+  }
 }
