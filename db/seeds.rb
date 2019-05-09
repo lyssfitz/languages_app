@@ -14,3 +14,41 @@ if Language.count == 0
         puts "#{name} created"
     end
 end
+
+if User.count == 0
+    for i in 1..50
+        User.create(
+            first_name: Faker::Name.first_name,
+            last_name: Faker::Name.last_name,
+            date_of_birth: Faker::Date.birthday(18, 65),
+            role: rand(2),
+            gender: rand(2),
+            email: Faker::Internet.email,
+            password: "password",
+            city: "Sydney",
+            biography: Faker::Lorem.paragraph,
+        ).language_ids = [rand(1..12)]
+        puts "#{i} created"
+    end
+end
+
+User.all.each do |user|
+    if user.role == "teacher"
+
+        Lesson.create!(
+            user_id: user.id,
+            language_id: user.languages.ids[0],
+            body: Faker::Lorem.paragraph,
+            lesson_date: Time.at(("2019-08-09".to_f - "2019-02-09".to_f)*rand + "2019-02-09".to_f),
+            lesson_time: "18:00:00",
+            street: "20 Bond Street",
+            city: "Sydney",
+            country: "Australia",
+            postcode: "2000",
+            price: 10,
+            max_students: rand(10..25),
+            difficulty: rand(3)
+        )
+        puts "#{user.first_name} created a lesson"
+    end
+end

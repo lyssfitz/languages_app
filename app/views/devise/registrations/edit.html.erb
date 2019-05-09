@@ -1,92 +1,102 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit Your Profile</h2>
+<div class="registration-form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+            <%= f.text_field :first_name, placeholder: "First Name", autofocus: true, class: "form-control" %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= f.text_field :last_name, placeholder: "Last Name", autofocus: true, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, class: "sr-only" %>
+        <%= f.email_field :email, placeholder: "Email Address", autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, placeholder: "First Name", autofocus: true %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, placeholder: "Last Name", autofocus: true %>
-  </div>
+      <div class="form-group field">
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, placeholder: "Create Password", autocomplete: "new-password", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form-group field">
+        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", autocomplete: "new-password", class: "form-control" %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="form-group field">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+      <div class="form-group field">
+        <%= f.label :date_of_birth, "Date of Birth:" %>
+        <%= f.date_field :date_of_birth, class: "" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="form-group field">
+      <p>Gender:</p>
+        <% @gender.each do |option|%>
+            <%= f.label "gender_#{option}".to_sym, option.titleize  %>
+            <%= f.radio_button :gender, option %>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+      <div class="form-group field">
+        <p>Do you want to be a Student or a Teacher?</p>
+        <% @roles.each do |option| %>
+            <%= f.label "role_#{option}".to_sym, option.titleize  %>
+            <%= f.radio_button :role, option %>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :date_of_birth, "Date of Birth" %>
-    <%= f.date_field :date_of_birth %>
-  </div>
+      <div class="custom-control custom-radio">
+        <p>What language(s) do you want to <span id="learn_teach">learn</span>?</p>
+        <% @languages.each do |language| %>
+            <%= f.label :languages, language.name %>
+            <%= f.radio_button :languages, language.id %>
+        <% end %>
+      </div>
 
-  <p>Gender:</p>
-  <% User.genders.keys.each do |option|%>
-    <div class="field">
-      <%= f.label "gender_#{option}".to_sym, option.titleize  %>
-      <%= f.radio_button :gender, option %>
+      <div class="form-group field">
+        <%= f.label :city, "City:" %>
+        <%= f.select :city, [[@city]], class: "form-control"  %>
+      </div>
+
+      <div class="form-group custom-file field">
+        <%= f.label :picture, class: "custom-file-label" %>
+        <%= f.file_field :picture, accept: "image/png, image/gif, image/jpeg, image/jpg", class: "custom-file-input" %>
+      </div>
+
+      <div class="form-group field">
+        <%= f.label :biography, "Tell us about you" %><br />
+        <%= f.text_area :biography, placeholder: "Add some details about yourself..", class: "form-control" %>
+      </div>
+
+    <div class="actions">
+      <%= f.submit "Update", class: "btn btn-outline-dark" %>
     </div>
   <% end %>
-
-  <p>Do you want to be a Student or a Teacher?</p>
-  <% User.roles.keys.each do |option| %>
-    <div class="field">
-      <%= f.label "role_#{option}".to_sym, option.titleize  %>
-      <%= f.radio_button :role, option %>
-    </div>
-  <% end %>
-
-  <p>What language do you want to learn?</p>
-  <% Language.all.each do |option| %>
-    <div class="field">
-      <%= f.label :languages, option.name  %>
-      <%= f.radio_button :languages, option.id %>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :city, "City:" %>
-    <%= f.select :city, [["Sydney, Australia"]]  %>
-  </div>
-
-  <div class="field">
-    <%= f.label :biography, "Tell us about you" %><br />
-    <%= f.text_area :biography, placeholder: "Add some details about yourself.." %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+</div>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-dark" %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", :back, class: "btn btn-outline-dark" %>
+
+<script>
+  let student = document.getElementById("user_role_student")
+  let teacher = document.getElementById("user_role_teacher")
+
+  student.addEventListener("click",function(){
+    document.getElementById("learn_teach").innerHTML = "Learn";
+  });
+
+  teacher.addEventListener("click",function(){
+    document.getElementById("learn_teach").innerHTML = "Teach";
+  });
+</script>

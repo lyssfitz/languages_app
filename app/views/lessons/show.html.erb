@@ -1,0 +1,64 @@
+<h1><%= @lesson.language.name %> Lesson</h1>
+<div>
+    <h2>Lesson Details</h2>
+    <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
+    <p>Date: <%= @lesson.lesson_date %></p> 
+    <p>Time: <%= @lesson.lesson_time %></p> 
+    <p>Ticket Price: $<%= @lesson.price%>
+    <p>Lesson Focus: <%= @lesson.body %></p> 
+    <p>Difficulty: <%= @lesson.difficulty %></p> 
+    <p>Location: </p>
+    <p><%= @lesson.street %> </p>
+    <p><%= @lesson.city %> </p>
+    <p><%= @lesson.state + " " + @lesson.postcode%> </p>
+    <p><%= @lesson.country %> </p>
+    <% if current_user.role == "teacher" %>
+        <p><%= link_to "Edit", edit_lesson_path(@lesson.id)%></p>
+        <p><%= link_to "Delete", @lesson, method: :delete %></p>
+    <% else %>
+        <button id="stripePayment"> Buy Ticket $ <%= number_with_precision(@lesson.price / 100.0, precision: 2 ) %> </button>  
+
+        
+    <% end %>   
+    </div>
+    <script>
+        document.getElementById("stripePayment").addEventListener("click", function() {
+            var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
+
+              stripe.redirectToCheckout({
+      sessionId: "<%= @stripe_session_id %>"
+    })
+    .then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    });
+});
+    </script>   
+
+
+
+
+<%= form_with model: @comment, local:true do |form| %>
+    
+    <h2> Comments </h2>
+    <p> Type any questions or comments about this lesson here.</p>
+    <div>
+
+    <%= form.hidden_field :lesson_id, value: @lesson.id %>
+    </div>
+        <div>
+        <% @lesson.comments.each do |comment| %> 
+        <p><%= comment.body%></p>
+        <% end %>
+        </div>
+        <div> 
+
+            <%= form.label :comments %>
+            <%= form.text_area :body, placeholder: "Type comments or questions here" %>
+        </div> 
+
+        <div>
+            <%= form.submit %>
+        </div>
+    <% end %>

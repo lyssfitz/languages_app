@@ -1,14 +1,9 @@
-<h1>Lang.Up</h1>
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-<% else %>
-  <%= link_to "Create Account", new_user_registration_path %> |
-  <%= link_to "Login", new_user_session_path  %>
-<% end %>
-</p>
-
-<h2> Join the Lang.Up Crew</h2>
-
-<h3>Find a Teacher near you and start learning a language today!<h3>
+<div class="background-container">
+    <div class="align-to-center">
+        <h2> Join the Lang.Up Crew</h2> 
+        <h3>Find a Teacher near you and start learning a language today!<h3>
+        <div>
+            <%= link_to "Create Account", new_user_registration_path, class: "btn btn-outline-light" %>
+        </div>
+    </div>
+</div>

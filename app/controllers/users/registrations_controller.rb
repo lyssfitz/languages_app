@@ -3,25 +3,41 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :view_variables
 
   # GET /resource/sign_up
   def new
     super
+    @disable_nav = true
   end
 
   # POST /resource
   def create
     super
-    UsersLanguage.create(
-      user_id: current_user.id,
-      language_id: params[:user][:languages]
-    )
+    unless !current_user
+      UsersLanguage.create(
+        user_id: current_user.id,
+        language_id: params[:user][:languages]
+      )
+    end
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+    @language = current_user.languages
+  end
+
+  def update
+
+  end
+
+  def view_variables
+    @city = "Sydney"
+    @languages = Language.all
+    @gender = User.genders.keys
+    @roles = User.roles.keys
+  end
 
   # PUT /resource
   # def update
@@ -42,11 +58,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:fist_name, :last_name, :date_of_birth, :role, :language, :gender])
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -54,13 +70,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  # def user_params
+  #   params.require(:user).permit(:first_name, :last_name, :date_of_birth, )
+  # end 
+
+  def after_sign_up_path_for(resource)
+    super(resource)
+    lessons_path
+  end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    super(resource)
+    home_path
+  end
+
 end

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <div>
+        <span class="navbar-brand mb-0 h1">Lang.Up</span>
+    </div>
+    <div>
+        <ul class="nav">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <% if current_user.role == "teacher" %>
+                    <%= link_to 'New Lesson', new_lesson_path, class: "nav-link" %>
+                <% else %>
+                    <%= link_to 'Explore', explore_path, class: "nav-link" %>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'My Lessons', lessons_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+                <div class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</div>
+                <div class="dropdown-menu dropdown-menu-right" id="dropdown-menu">
+                    <%= link_to "My Profile", profile_path, class: "dropdown-item" %>
+                    <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item"  %>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to "Log out", destroy_user_session_path, method:'delete', class: "dropdown-item" %>                    
+                </div>
+            </li>
+        </ul>   
+    </div>
+</nav>
