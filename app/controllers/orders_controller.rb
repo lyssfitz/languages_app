@@ -23,7 +23,10 @@ class OrdersController < ApplicationController
     end
 
     def show
+        lesson = Lesson.find(params[:id].to_i)
         @orders = Order.where(lesson_id: params[:id])
-
+        @student_count = @orders.count
+        @total_profit = lesson.price * @student_count
+        @available_tickets = lesson.max_students - @student_count
     end
 end

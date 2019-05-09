@@ -25,7 +25,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
-    @language = current_user!.languages.ids[0]
+  end
+
+  def update
+    super
+    @users_language = UsersLanguage.find_by(user_id: current_user.id)
+    p @users_language
+    p params[:user][:languages]
+    @users_language.update(
+      language_id: params[:user][:languages]
+    )
   end
 
   def instant_variables_for_view
