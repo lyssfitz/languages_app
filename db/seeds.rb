@@ -39,7 +39,7 @@ User.all.each do |user|
             user_id: user.id,
             language_id: user.languages.ids[0],
             body: Faker::Lorem.paragraph,
-            lesson_date: Time.at(("2019-08-09".to_f - "2019-02-09".to_f)*rand + "2019-02-09".to_f),
+            lesson_date: Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today),
             lesson_time: "18:00:00",
             street: "20 Bond Street",
             city: "Sydney",
