@@ -1,7 +1,9 @@
 class Lesson < ApplicationRecord
   belongs_to :user
   belongs_to :language
+  has_many :orders
   has_many :comments, dependent: :destroy
+  has_many :orders
   enum difficulty: { easy:0, intermediate: 1, expert:2 }
   validates :language, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty, presence: true 
   validate :lesson_date_must_not_be_in_the_past, :lesson_date_must_be_within_12_months, :price_must_be_within_range, :lesson_time_must_be_within_timeframe, :max_students_must_be_within_range
