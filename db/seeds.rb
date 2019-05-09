@@ -16,7 +16,7 @@ if Language.count == 0
 end
 
 if User.count == 0
-    for i in 1..500
+    for i in 1..100
         User.create(
             first_name: Faker::Name.first_name,
             last_name: Faker::Name.last_name,

@@ -1,5 +1,7 @@
 <h1> Find A Lesson </h1>
 
+        <% lesson_count = 0 %>
+
         <% @lessons.each do |lesson| %>
                 <div class="lessons_card">
                 
@@ -9,5 +11,12 @@
                     <%= link_to "See Lesson Details", lesson_path(lesson.id)%>
                     
                 </div>
+        <% lesson_count += 1%>
+        <% end %>
+        
+         <% if lesson_count == 0%>
+
+                <p> Oh no! There are no current lessons scheduled in your selected languages. Please bookmark this page and check back again soon!</p>
+
         <% end %>
 
