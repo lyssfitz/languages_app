@@ -35,11 +35,11 @@ class LessonsController < ApplicationController
             payment_method_types: ['card'],
             customer_email: current_user.email,
             line_items: [{
-              name: @lesson.language.name,
-              description: @lesson.body,
-              amount: price,
-              currency: 'aud',
-              quantity: 1,
+                name: @lesson.language.name,
+                description: @lesson.body,
+                amount: price,
+                currency: 'aud',
+                quantity: 1,
               }],
               payment_intent_data: {
                   metadata: {

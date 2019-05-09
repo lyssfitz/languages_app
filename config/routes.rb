@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   get '/profile', to:'pages#show', as: 'profile'
   post "/orders", to: "orders#stripe"
   get "/orders/success", to: "orders#success"
+  get "/orders/:id", to: "orders#show", as: "lesson_orders"
 end
  

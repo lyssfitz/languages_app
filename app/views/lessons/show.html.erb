@@ -12,8 +12,9 @@
     <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
-        <%= link_to "Edit", edit_lesson_path(@lesson.id)%>
-        <%= link_to "Delete", @lesson, method: :delete %>
+        <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
+        <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
+        <%= link_to "Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
     <% else %>
         <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>   
@@ -44,7 +45,7 @@
         <% @comments.each do |c| %>
             <a class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><%= c.user.first_name %> <%= c.user.last_name %></h5>
+                    <h5 class="mb-1"><%= c.user.first_name %> </h5>
                     <small class="text-muted"><%= c.body %></small>
                     <p class="mb-1"></p>
                     <small class="text-muted"><%= c.created_at %></small>
