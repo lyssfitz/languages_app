@@ -3,9 +3,9 @@
         <% @lessons.each do |lesson| %>
                 <div class="lessons_card">
                 
-                    <p><%= lesson.lesson_date %></p> 
-                    <p><%= lesson.language.name %></p> 
-                    <p><%= lesson.difficulty %></p> 
+                    <p>Date: <%= lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
+                    <p>Language: <%= lesson.language.name %></p> 
+                    <p>Difficulty: <%= lesson.difficulty %></p> 
                     <%= link_to "See Lesson Details", lesson_path(lesson.id)%>
                     
                 </div>
