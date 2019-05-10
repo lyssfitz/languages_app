@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
+    before_action :authorise_teacher, only: [:show]
 
     def stripe
         order_id = params[:data][:object][:payment_intent]

@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
     end
 
     def after_update_path_for(resource)
-        super(resource)
         if current_user.role == "teacher"
             lessons_path
         else 
