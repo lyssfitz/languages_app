@@ -29,4 +29,9 @@ class OrdersController < ApplicationController
         @total_profit = lesson.price * @student_count
         @available_tickets = lesson.max_students - @student_count
     end
+
+    def success
+        
+    end
+
 end

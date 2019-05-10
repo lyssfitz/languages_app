@@ -16,7 +16,7 @@ if Language.count == 0
 end
 
 if User.count == 0
-    for i in 1..50
+    for i in 1..100
         User.create(
             first_name: Faker::Name.first_name,
             last_name: Faker::Name.last_name,
@@ -35,11 +35,11 @@ end
 User.all.each do |user|
     if user.role == "teacher"
 
-        Lesson.create!(
+        lesson = Lesson.new(
             user_id: user.id,
             language_id: user.languages.ids[0],
             body: Faker::Lorem.paragraph,
-            lesson_date: Time.at(("2019-08-09".to_f - "2019-02-09".to_f)*rand + "2019-02-09".to_f),
+            lesson_date: Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today),
             lesson_time: "18:00:00",
             street: "20 Bond Street",
             city: "Sydney",
@@ -50,6 +50,8 @@ User.all.each do |user|
             max_students: rand(10..25),
             difficulty: rand(3)
         )
+
+        lesson.save(validate: false)
         puts "#{user.first_name} created a lesson"
     end
 end

@@ -27,10 +27,11 @@
         <% @lessons.each do |lesson| %>
             <% if lesson.lesson_date < Date.today %>
                 <div class="lessons_card">
-                    <p><%= lesson.lesson_date %></p> 
-                    <p><%= lesson.language.name %></p> 
-                    <p><%= lesson.difficulty %></p> 
-                    <%= link_to "View Details", lesson_path(lesson.id) %>
+                
+                    <p>Date: <%= lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
+                    <p>Language: <%= lesson.language.name %></p> 
+                    <p>Difficulty: <%= lesson.difficulty %></p> 
+                    <%= link_to "View Details", lesson_path(lesson.id)%>
                 </div>
                 <% lesson_count += 1 %>
             <% end %>
