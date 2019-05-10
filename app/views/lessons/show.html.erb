@@ -1,24 +1,29 @@
 <h1><%= @lesson.language.name %> Lesson</h1>
-<div>
-    <h2>Lesson Details</h2>
-    <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
-    <p>Date: <%= @lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
-    <p>Time: <%= @lesson.lesson_time.strftime("%I:%M %p") %></p> 
-    <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
-    <p>Lesson Focus: <%= @lesson.body %></p> 
-    <p>Difficulty: <%= @lesson.difficulty %></p> 
-    <p>Location: </p>
-    <p><%= @lesson.street %> </p>
-    <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
-    <p><%= @lesson.country %> </p>
-    <% if current_user.role == "teacher" %>
-        <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
-        <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
-        <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
-    <% else %>
-        <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
-    <% end %>   
-</div>
+
+    <div>
+        <h2>Lesson Details</h2>
+            <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
+            <p>Date: <%= @lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
+            <p>Time: <%= @lesson.lesson_time.strftime("%I:%M %p") %></p> 
+            <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
+            <p>Lesson Focus: <%= @lesson.body %></p> 
+            <p>Difficulty: <%= @lesson.difficulty %></p> 
+            <p>Location: </p>
+            <p><%= @lesson.street %> </p>
+            <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
+            <p><%= @lesson.country %> </p>
+
+        <% unless @lesson.lesson_date < Date.today %>
+            <% if current_user.role == "teacher" %>
+                <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
+                <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
+                <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
+            <% else %>
+                <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
+            <% end %>   
+        <% end %>
+    </div>
+    
 
 <div class="form-layout"> 
     <%= form_with model: @comment, local:true do |form| %>
@@ -40,6 +45,7 @@
             <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
         </div>
     <% end %>
+
     <div>
         <h4>All Comments:</h4>
         <div class="list-group">
