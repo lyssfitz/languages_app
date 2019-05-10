@@ -1,8 +1,7 @@
-<h2>Edit Your Profile</h2>
-<div class="form-layout">
+<div class="view-container">
+  <h2>Edit Your Profile</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-
     <div class="form-row">
       <div class="form-group col-md-6">
           <%= f.text_field :first_name, placeholder: "First Name", autofocus: true, class: "form-control" %>
@@ -84,14 +83,12 @@
       <%= f.submit "Update", class: "btn btn-outline-dark" %>
     </div>
   <% end %>
-</div>
+  <h3>Cancel my account</h3>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-dark" %></p>
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-dark" %></p>
 
 <%= link_to "Back", :back, class: "btn btn-outline-dark" %>
-
+</div>
 <script>
   let student = document.getElementById("user_role_student")
   let teacher = document.getElementById("user_role_teacher")

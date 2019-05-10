@@ -1,6 +1,7 @@
-<h1><%= @lesson.language.name %> Lesson</h1>
-<div>
-    <h2>Lesson Details</h2>
+<div class="view-container">
+  <h1><%= @lesson.language.name %> Lesson</h1>
+  <h2>Lesson Details</h2>
+  <div>
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name %></p> 
     <p>Date: <%= l @lesson.lesson_date %></p> 
     <p>Time: <%= l @lesson.lesson_time %></p> 
@@ -12,67 +13,68 @@
     <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
-        <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
-        <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
-        <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
+    <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
+    <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
+    <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
     <% else %>
-        <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
-    <% end %>   
-</div>
-
-<div class="form-layout"> 
-    <%= form_with model: @comment, local:true do |form| %>
-        <h2> Comments </h2>
-        <p> Type any questions or comments about this lesson here.</p>
-        <div>
-            <%= form.hidden_field :lesson_id, value: @lesson.id %>
-        </div>   
-        <div class="comment-box">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Comment</span>
-                </div>
-                    <%= form.text_area :body, placeholder: "Type comments or questions here", class: "form-control" %>
-                </div>
-            </div>
-        <div>
-        <div> 
-            <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
-        </div>
+    <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>
-    <div>
-        <h4>All Comments:</h4>
-        <div class="list-group">
-            <% if @comments.empty? %>
-                <p> There are no comments</p>
-            <% else %>
-                <% @comments.each do |c| %>
-                    <a class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><%= c.user.first_name %> </h5>
-                            <small class="text-muted"><%= c.body %></small>
-                            <p class="mb-1"></p>
-                            <small class="text-muted"><%= c.created_at %></small>
-                        </div>
-                    </a>
-                <% end %>
-            <% end %>
+  </div>
+
+  <div class="comments-section"> 
+    <%= form_with model: @comment, local:true do |form| %>
+      <h2> Comments </h2>
+      <p> Type any questions or comments about this lesson here.</p>
+      <div>
+        <%= form.hidden_field :lesson_id, value: @lesson.id %>
+      </div>   
+      <div class="comment-box">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Comment</span>
+          </div>
+          <%= form.text_area :body, class: "form-control" %>
         </div>
+      </div>
+      <div> 
+        <%= form.submit "Post Comment", class: "btn btn-outline-dark" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="comments-section">
+    <h4>All Comments:</h4>
+    <div class="list-group">
+      <% if @comments.empty? %>
+        <p> There are no comments</p>
+      <% else %>
+        <% @comments.each do |c| %>
+          <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                  <a href="<%= profile_path %>" class="mb-1"><%= c.user.first_name %></a>
+                  <small><%= c.body %></small>
+                  <p class="mb-1"></p>
+                  <small class="text-muted">Posted at: <%= l c.created_at %></small>
+              </div>
+          </a>
+        <% end %>
+      <% end %>
     </div>
+  </div>
 </div>
 
 
 <script>
-    document.getElementById("stripePayment").addEventListener("click", function() {
-        var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
+document.getElementById("stripePayment").addEventListener("click", function() {
+var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
 
-        stripe.redirectToCheckout({
-            sessionId: "<%= @stripe_session_id %>"
-        })
-        .then(function (result) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `result.error.message`.
-        });
-    });
+stripe.redirectToCheckout({
+sessionId: "<%= @stripe_session_id %>"
+})
+.then(function (result) {
+// If `redirectToCheckout` fails due to a browser or network
+// error, display the localized error message to your customer
+// using `result.error.message`.
+});
+});
 </script> 

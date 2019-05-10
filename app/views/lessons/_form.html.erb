@@ -1,53 +1,66 @@
-<%= form_with model: @lesson, local:true, class: "view-container" do |form| %>
-    <div class="form-group"> 
-        <%= form.label :language_id, "Language:" %>
-        <%= form.select(:language_id, @languages.map {|l| [l.name, l.id] }, prompt: "Select Language", class: "form-control") %>
-    </div> 
-    <div class="form-group">
-        <%= form.label :body, "Lesson Focus" %>
-        <%= form.text_area :body, placeholder: "e.g. greetings, food, common phrases", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :lesson_date, "Date" %>
-        <%= form.date_field :lesson_date, min: Date.today, max: Date.today.next_year, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :lesson_time, "Time" %>
-        <%= form.time_field :lesson_time, min:"08:00", max:"20:00", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :street %>
-        <%= form.text_field :street, placeholder: "e.g. 10 King Street", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :city %>
-        <%= form.text_field :city, value: "Sydney", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :state %>
-        <%= form.text_field :state, value: "NSW", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :country %>
-        <%= form.text_field :country, value: "Australia", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :postcode %>
-        <%= form.text_field :postcode, placeholder: "2000", class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :price, "Ticket Price $" %>
-        <%= form.number_field :price, in: 10..100, placeholder: 20, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :max_students, "Max Students"%>
-        <%= form.number_field :max_students, in: 5..30, placeholder: 15, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= form.label :difficulty, "What is the level of difficulty?" %>
-        <%= form.select(:difficulty,  @difficulty, prompt: "Select difficulty", class: "selectpicker" )%>
-    </div>
-    <div class="form-group">
-        <%= form.submit "Create Lesson", class: "btn btn-outline-dark" %>
-    </div>
+
+<%= form_with model: @lesson, local:true do |form| %>
+  <div class="form-group"> 
+    <%= form.label :language_id, "Language:" %>
+    <%= form.select(:language_id, @languages.map {|l| [l.name, l.id] }, prompt: "Select Language", class: "form-control") %>
+  </div> 
+
+  <div class="form-group">
+    <%= form.label :body, "Lesson Focus" %>
+    <%= form.text_area :body, placeholder: "Write about what you will teach e.g. greetings, food, common phrases", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :lesson_date, "Date" %>
+    <%= form.date_field :lesson_date, min: Date.today, max: Date.today.next_year, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :lesson_time, "Time" %>
+    <%= form.time_field :lesson_time, min:"08:00", max:"20:00", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :street %>
+      <%= form.text_field :street, placeholder: "e.g. 10 King Street", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :city %>
+      <%= form.text_field :city, value: "Sydney", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :state %>
+      <%= form.text_field :state, value: "NSW", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :country %>
+      <%= form.text_field :country, value: "Australia", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :postcode %>
+      <%= form.text_field :postcode, placeholder: "2000", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :price, "Ticket Price $" %>
+      <%= form.number_field :price, in: 10..100, placeholder: 20, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :max_students, "Max Students"%>
+      <%= form.number_field :max_students, in: 5..30, placeholder: 15, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= form.label :difficulty, "What is the level of difficulty?" %>
+      <%= form.select(:difficulty,  @difficulty, prompt: "Select difficulty", class: "selectpicker" )%>
+  </div>
+  
+  <div class="form-group">
+      <%= form.submit "Create Lesson", class: "btn btn-outline-dark" %>
+  </div>
 <% end %>

@@ -10,15 +10,15 @@ class Lesson < ApplicationRecord
   private 
   
   def lesson_date_must_not_be_in_the_past
-    if  lesson_date < Date.today
-            errors.add(:lesson_date, "must not be in the past")
-          end
+    if lesson_date < Date.today
+      errors.add(:lesson_date, "must not be in the past")
+    end
   end
 
   def lesson_date_must_be_within_12_months
-    if  lesson_date > Date.today.next_year
-            errors.add(:lesson_date, "must not be more than 12 months in advance")
-          end
+    if lesson_date > Date.today.next_year
+      errors.add(:lesson_date, "must not be more than 12 months in advance")
+    end
   end
 
   def lesson_time_must_be_within_timeframe
@@ -38,5 +38,4 @@ class Lesson < ApplicationRecord
       errors.add(:max_students, "must be between 5 and 30")
     end
   end
-
 end
