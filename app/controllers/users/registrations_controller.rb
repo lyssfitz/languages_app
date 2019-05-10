@@ -67,27 +67,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:fist_name, :last_name, :date_of_birth, :role, :language, :gender])
+  #     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :date_of_birth, :gender, :city, :biography, :role, :picture)}
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :current_password, :date_of_birth, :gender, :city, :biography, :role, :picture)}
   # end
 
-  # def user_params
-  #   params.require(:user).permit(:first_name, :last_name, :date_of_birth, )
-  # end 
-
-  def after_sign_up_path_for(resource)
-    super(resource)
-    lessons_path
-  end
-
   # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    super(resource)
-    home_path
-  end
+  # def after_inactive_sign_up_path_for(resource)
+  #   super(resource)
+  #
+  # end
 
 end

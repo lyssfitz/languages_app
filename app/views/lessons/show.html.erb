@@ -1,7 +1,7 @@
 <h1><%= @lesson.language.name %> Lesson</h1>
 <div>
     <h2>Lesson Details</h2>
-    <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name%></p> 
+    <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name %></p> 
     <p>Date: <%= l @lesson.lesson_date %></p> 
     <p>Time: <%= l @lesson.lesson_time %></p> 
     <p>Ticket Price: $<%= number_with_precision(@lesson.price, precision: 2 ) %>
