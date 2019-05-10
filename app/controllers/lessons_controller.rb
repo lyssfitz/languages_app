@@ -8,7 +8,11 @@ class LessonsController < ApplicationController
     before_action :set_difficulty, only: [:new, :edit]
 
     def index
-        @lessons = current_user.lessons
+        if current_user.role == "teacher"
+            @lessons = current_user.lessons
+        else
+            @lessons = current_user.ordered_lessons
+        end
     end
 
     def create

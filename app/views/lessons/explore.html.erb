@@ -1,8 +1,12 @@
 <h1> Find A Lesson </h1>
 
-        <% lesson_count = 0 %>
+        <% if @lessons.empty?%>
 
+                <p> Oh no! There are no current lessons scheduled in your selected languages. Please bookmark this page and check back again soon!</p>
+
+<% else %>
         <% @lessons.each do |lesson| %>
+        <% if lesson.lesson_date >= Date.today %>
                 <div class="card border border-dark rounded">
                     <p>Date: <%= lesson.lesson_date.strftime("%A, %d %B %Y") %></p> 
                     <p>Time: <%= lesson.lesson_time.strftime("%I:%M %p") %></p> 
@@ -10,12 +14,10 @@
                     <p>Level of Difficulty: <%= lesson.difficulty.titleize %></p> 
                     <%= link_to "See Lesson Details", lesson_path(lesson.id)%>
                 </div>
-        <% lesson_count += 1%>
+                <% end %>
         <% end %>
         
-         <% if lesson_count == 0%>
-
-                <p> Oh no! There are no current lessons scheduled in your selected languages. Please bookmark this page and check back again soon!</p>
+         
 
         <% end %>
 
