@@ -8,7 +8,11 @@ class LessonsController < ApplicationController
     before_action :set_difficulty, only: [:new, :edit]
 
     def index
-        @lessons = current_user.lessons
+        if current_user.role == "teacher"
+            @lessons = current_user.lessons
+        else
+            @lessons = current_user.ordered_lessons
+        end
     end
 
     def create
@@ -47,7 +51,7 @@ class LessonsController < ApplicationController
                       user_id: current_user.id
                   }
               },
-              success_url: 'http://localhost:3000/orders/success',
+              success_url: 'https://aqueous-garden-54322.herokuapp.com/orders/success',
               cancel_url: 'http://localhost:3000/cancel',
             )
           @stripe_session_id = stripe_session.id
@@ -69,7 +73,7 @@ class LessonsController < ApplicationController
 
     def explore
         @language_ids = current_user.users_languages.pluck(:language_id)
-        @lessons = Lesson.where(language_id: @language_ids)
+        @lessons = Lesson.where(language_id: @language_ids) 
     end
 
     private

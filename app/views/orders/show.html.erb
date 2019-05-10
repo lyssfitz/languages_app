@@ -1,3 +1,16 @@
-<% @orders.each do |order|%>
-    <%= order.price %>
-<% end %>
+
+<h2>Students Attending Lesson</h2>
+<div>
+    <% @orders.each do |order|%>
+        <div class="card border border-dark rounded">
+            <p><%= order.user.first_name %> <%= order.user.last_name %></p>
+            <p><%= order.status %></p>
+        </div>
+    <% end %>
+</div>
+
+<div>
+    <p>Total Students Attending: <%= @student_count %></p>
+    <p>Ticket Still Available: <%= @available_tickets %></p>
+    <p>Total Paid: $<%= number_with_precision(@total_profit, precision: 2 ) %> </p>
+</div>
