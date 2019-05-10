@@ -35,6 +35,12 @@ en:
     attributes:
       lesson:
         body: "Lesson Focus"
+  date:
+    formats:
+      default: "%d %B %Y"
+  time:
+    formats:
+      default: "%I:%M %p"      
     errors:
       models:
         user:
