@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :authenticate_user!
-    before_action :authorise_teacher, only: [:show]
 
     def stripe
         order_id = params[:data][:object][:payment_intent]
@@ -21,7 +20,6 @@ class OrdersController < ApplicationController
     end
 
     def success
-
     end
 
     def show
@@ -31,9 +29,4 @@ class OrdersController < ApplicationController
         @total_profit = lesson.price * @student_count
         @available_tickets = lesson.max_students - @student_count
     end
-
-    def success
-        
-    end
-
 end

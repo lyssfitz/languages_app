@@ -6,6 +6,7 @@ class LessonsController < ApplicationController
     before_action :authorise_student, only: [:explore]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
+    before_action :set_student_attendance, only: [:index, :explore, :show]
 
     def index
         if current_user.role == "teacher"
@@ -73,7 +74,7 @@ class LessonsController < ApplicationController
 
     def explore
         @language_ids = current_user.users_languages.pluck(:language_id)
-        @lessons = Lesson.where(language_id: @language_ids) 
+        @lessons = Lesson.where(language_id: @language_ids)
     end
 
     private
@@ -106,6 +107,11 @@ class LessonsController < ApplicationController
         if current_user.role != "student"
             redirect_to lessons_path
         end
+    end
+
+    def set_student_attendance
+        orders = Order.where(lesson_id: params[:id])
+        @total_students_attending = orders.count
     end
 
     def lesson_params
