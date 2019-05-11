@@ -54,3 +54,18 @@ body {
 .comments-section {
   padding-top: 40px;
 }
+
+.card {
+  margin-top: 20px;
+}
+
+.view-headers {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  font-size: 38px;
+}
+
+.btn-margin {
+  margin-top: 20px;
+  margin-top: 20px;
+}

@@ -1,52 +1,26 @@
 <div class="view-container">
-    <h1> My Upcoming Lessons</h1>
-        <% lesson_count = 0 %>
-        <% @lessons.each do |lesson| %>
-            <% if lesson.lesson_date >= Date.today %>
-                <div class="card text-left">
-                    <div>
-                        <h5 class="card-header"><%= lesson.language.name %></h5>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
-                        <p class="card-text">
-                        Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
-                        Date: <%= l lesson.lesson_date %></br>
-                        Time: <%= l lesson.lesson_time %>
-                        </p>
-                        <%= link_to "See Lesson Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
-                    </div>
-                </div>
-                <% lesson_count += 1 %>
-            <% end %>
-        <% end %>
-
-        <% if lesson_count == 0 %>
-            <p>You do not have any upcoming lessons! </p>
-        <% end%>
-
-        <% if current_user.role == "teacher" %>
-            <%= link_to "Create New Lesson", new_lesson_path, class: "btn btn-block btn-dark" %>
-        <% else %>   
-            <%= link_to "Join a Lesson", explore_path, class: "btn btn-block btn-dark" %>
-        <% end %>
-
-        <h2> Past Lessons </h2>
-        <% lesson_count = 0 %>
-        <% @lessons.each do |lesson| %>
-            <% if lesson.lesson_date < Date.today %>
+  <h2 class="view-headers"> My Upcoming Lessons</h2>
+    <% lesson_count = 0 %>
+    <% @lessons.each do |lesson| %>
+        <% if lesson.lesson_date >= Date.today %>
             <div class="card text-left">
                 <div>
-                    <h5 class="card-header"><%= lesson.language.name %></h5>
+                    <h5 class="card-header"><%= l lesson.lesson_date %></h5>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
+                        <% if @total_students_attending == @lesson.max_students %>
+                            <p>Sold Out!<p>
+                            <% else %>
+                            <p class="text-muted"><%= @total_students_attending %> students are going. <%= @lesson.max_students - @total_students_attending %> tickets available</p>
+                            <% end %>
                     <p class="card-text">
                     Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
-                    Date: <%= l lesson.lesson_date %></br>
+                    Language: <%= lesson.language.name %></br>
+                    Location: 
                     Time: <%= l lesson.lesson_time %>
                     </p>
-                    <%= link_to "View Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
+                    <%= link_to "See Lesson Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
                 </div>
             </div>
             <% lesson_count += 1 %>
@@ -54,6 +28,38 @@
     <% end %>
 
     <% if lesson_count == 0 %>
-        <p>You do not have any previous lessons! </p>
+        <p>You do not have any upcoming lessons! </p>
     <% end%>
+
+    <% if current_user.role == "teacher" %>
+        <%= link_to "Create New Lesson", new_lesson_path, class: "btn-margin btn btn-block btn-dark" %>
+    <% else %>   
+        <%= link_to "Join a Lesson", explore_path, class: "btn btn-block btn-dark" %>
+    <% end %>
+
+    <h2 class="view-headers"> Past Lessons </h2>
+    <% lesson_count = 0 %>
+    <% @lessons.each do |lesson| %>
+        <% if lesson.lesson_date < Date.today %>
+        <div class="card text-left">
+            <div>
+                <h5 class="card-header"><%= lesson.language.name %></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
+                <p class="card-text">
+                Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
+                Date: <%= l lesson.lesson_date %></br>
+                Time: <%= l lesson.lesson_time %>
+                </p>
+                <%= link_to "View Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
+            </div>
+        </div>
+        <% lesson_count += 1 %>
+    <% end %>
+  <% end %>
+
+  <% if lesson_count == 0 %>
+      <p>You do not have any previous lessons! </p>
+  <% end%>
 </div>

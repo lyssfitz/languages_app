@@ -1,5 +1,5 @@
 <div class="view-container">
-  <h2>Edit Your Profile</h2>
+  <h2 view="view-headers">Edit Your Profile</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-row">
@@ -61,7 +61,7 @@
 
     <div class="form-group field">
       <%= f.label :city, "City:" %>
-      <%= f.select :city, [[@city]], class: "form-control"  %>
+      <%= f.select :city, [["Sydney"]], class: "form-control"  %>
     </div>
 
     <div class="form-group custom-file field">
@@ -74,30 +74,18 @@
       <%= f.text_area :biography, placeholder: "Add some details about yourself..", class: "form-control" %>
     </div>
 
-  <div class="form-group field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "Current Password" %>
-  </div>
+    <div class="form-group field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "Current Password" %>
+    </div>
 
     <div class="actions">
-      <%= f.submit "Update", class: "btn btn-outline-dark" %>
+      <%= f.submit "Update Profile", class: "btn btn-margin btn-outline-dark" %>
     </div>
   <% end %>
-  <h3>Cancel my account</h3>
 
+  <h3 class="">Cancel my account</h3>
   <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-dark" %></p>
-
-<%= link_to "Back", :back, class: "btn btn-outline-dark" %>
+  <%= link_to "Back", :back, class: "btn btn-outline-dark" %>
+  
 </div>
-<script>
-  let student = document.getElementById("user_role_student")
-  let teacher = document.getElementById("user_role_teacher")
-
-  student.addEventListener("click",function(){
-    document.getElementById("learn_teach").innerHTML = "Learn";
-  });
-
-  teacher.addEventListener("click",function(){
-    document.getElementById("learn_teach").innerHTML = "Teach";
-  });
-</script>

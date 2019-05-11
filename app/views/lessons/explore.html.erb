@@ -1,26 +1,30 @@
 <div class="view-container">
-	<h1> Find A Lesson </h1>
+	<h1 class="view-headers"> Find A Lesson </h1>
 	<% if @lessons.empty? %>
 		<p> Oh no! There are no current lessons scheduled in your selected languages. Please bookmark this page and check back again soon!</p>
 	<% else %>
-		<% @lessons.each do |lesson| %>
-			<% if lesson.lesson_date >= Date.today %>
-				<div class="card text-left">
-					<div>
-						<h5 class="card-header"><%= lesson.language.name %></h5>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
-						<p class="card-text">
-							Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
-							Date: <%= l lesson.lesson_date %></br>
-							Time: <%= l lesson.lesson_time %>
-						</p>
-						<%= link_to "See Lesson Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
-					</div>
-				</div>
-			<% end %>
-		<% end %>
-	<% end %>
+    <% @lessons.group_by(&:lesson_date).sort.each do |date, lessons| %>
+      <% if date >= Date.today %>
+        <div class="card text-left">
+          <div>
+            <h5 class="card-header"><%= l date %></h5>
+          </div>
+          <% lessons.each do |lesson| %>
+            <div class="card-body">
+              <h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
+              <p class="text-muted"><%= @total_students_attending %> students are going. <%= lesson.max_students - @total_students_attending %> tickets available</p>
+              <p class="card-text">
+                Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
+                Language: <%= lesson.language.name %></br>
+                Location: <%= lesson.street %>, <%= lesson.city %> <%= lesson.state %> </br>
+                Time: <%= l lesson.lesson_time %></br>
+              </p>
+              <%= link_to "See Lesson Details", lesson_path(lesson.id), class: "btn btn-outline-dark" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+	  <% end %>
+  <% end %>
 </div>
 

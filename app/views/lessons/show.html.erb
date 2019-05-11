@@ -1,7 +1,12 @@
 <div class="view-container">
-  <h1><%= @lesson.language.name %> Lesson</h1>
-  <h2>Lesson Details</h2>
+  <h1 class="view-headers><%= @lesson.language.name %> Lesson</h1>
+  <h2 ">Lesson Details</h2>
   <div>
+    <% if @total_students_attending == @lesson.max_students %>
+      <p>Sold Out!<p>
+    <% else %>
+      <p class="text-muted"><%= @total_students_attending %> students are going. <%= @lesson.max_students - @total_students_attending %> tickets available</p>
+    <% end %>
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name %></p> 
     <p>Date: <%= l @lesson.lesson_date %></p> 
     <p>Time: <%= l @lesson.lesson_time %></p> 
@@ -9,7 +14,7 @@
     <p>Lesson Focus: <%= @lesson.body %></p> 
     <p>Difficulty: <%= @lesson.difficulty %></p> 
     <p>Location: </p>
-    <p><%= @lesson.street %> </p>
+    <p><%= @lesson.street %>,</p>
     <p><%= @lesson.city %> <%= @lesson.postcode %> <%= @lesson.state %></p>
     <p><%= @lesson.country %> </p>
     <% if current_user.role == "teacher" %>
@@ -49,14 +54,16 @@
         <p> There are no comments</p>
       <% else %>
         <% @comments.each do |c| %>
-          <a class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="list-group">
+            <a href="<%= profile_path %>" class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="d-flex w-100 justify-content-between">
-                  <a href="<%= profile_path %>" class="mb-1"><%= c.user.first_name %></a>
-                  <small><%= c.body %></small>
-                  <p class="mb-1"></p>
-                  <small class="text-muted">Posted at: <%= l c.created_at %></small>
+                <h5 class="mb-1"><%= c.user.first_name %> <%= c.user.last_name %></h5>
+                <p><%= c.user.role.titleize %></p>
+                <small>Posted at: <%= l c.created_at %></small>
               </div>
-          </a>
+              <p class="mb-1 text-left"><%= c.body %></small>
+            </a>
+          </div>
         <% end %>
       <% end %>
     </div>
