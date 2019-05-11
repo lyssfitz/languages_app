@@ -14,16 +14,29 @@
  *= require_self
  */
 
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
+
 body {
   margin: 0px auto;
   width: 100%;
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
 }
 
 .background-container {
   background: url("world_globe.png") no-repeat center center;
   background-size: cover;
   height: 900px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
 }
 
 .align-to-center {
