@@ -18,7 +18,7 @@
     <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
     <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
     <% elsif @total_students_attending == @lesson.max_students  %>
-      <p>Sold Out!<p>
+      <p>This lesson is Sold Out!<p>
     <% else %>
       <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>
