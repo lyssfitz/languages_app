@@ -28,6 +28,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 .background-container {
   background: url("world_globe.png") no-repeat center center;
   background-size: cover;
@@ -47,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .view-container {
-    width: 600px;
+    max-width: 600px;
     margin: 0px auto;
     padding-top: 50px;
 }

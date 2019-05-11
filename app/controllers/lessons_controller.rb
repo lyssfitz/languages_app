@@ -75,6 +75,8 @@ class LessonsController < ApplicationController
     def explore
         @language_ids = current_user.users_languages.pluck(:language_id)
         @lessons = Lesson.where(language_id: @language_ids)
+        @total_lessons = @lessons.select{|l| l.lesson_date >= Date.today }.count
+
     end
 
     private
