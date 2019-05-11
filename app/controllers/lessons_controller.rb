@@ -55,7 +55,7 @@ class LessonsController < ApplicationController
                 }
             },
             success_url: "#{domain}/orders/success",
-            cancel_url: "http://localhost:3000/cancel",
+            cancel_url: "#{domain}/cancel",
             )
       @stripe_session_id = stripe_session.id
     end
