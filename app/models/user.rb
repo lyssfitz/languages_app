@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_one_attached :picture
   validates :first_name, :last_name, :date_of_birth, :role, :gender, presence: true
   validate :age_checker
-  validates_format_of :first_name, :last_name, with: /^[\A-\z]+$/i, multiline: true, message: "must be a letter"
+  validates_format_of :first_name, :last_name, with: /^[\A-\z]+$/i, multiline: true, message: "can only be letters"
   before_create :set_default_picture
 
   private 
@@ -34,5 +34,4 @@ class User < ApplicationRecord
       picture.attach(io: File.open('app/assets/images/avatar.png'), filename: 'avatar.png', content_type: 'image/png')
     end
   end
-  
 end
