@@ -61,6 +61,10 @@
   </div>
   
   <div class="form-group">
+    <% if @lesson.id? %>
+      <%= form.submit "Edit Lesson", class: "btn btn-outline-dark" %>
+    <% else %>
       <%= form.submit "Create Lesson", class: "btn btn-outline-dark" %>
+    <% end %>
   </div>
 <% end %>

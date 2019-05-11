@@ -1,5 +1,5 @@
 <div class="lesson-container">
-    <h1> New Lesson </h1>
+    <h1 class="view-headers"> New Lesson </h1>
     <% if @lesson.errors.any? %>
       <% @lesson.errors.full_messages.each do |error|%>
           <p> <%= error %> </p>
