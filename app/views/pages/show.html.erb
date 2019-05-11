@@ -1,19 +1,28 @@
 <div>
-    <div>
-        <%= image_tag @user.picture if @user.picture.attached? %>
+    <div class="rounded mx-auto d-block">
+        <%= image_tag current_user.picture if current_user.picture.attached? %>
     </div>
+
     <div>
-        <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+        <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
     </div>
+
     <div>
-        <p>Location: <%= @user.city %></p>
+        <h6>Location:</h6> 
+        <p><%= current_user.city %></p>
     </div>
+
     <div>
-        <p>Languages I speak:  
-    Languages: <%= @user_languages%>
-        </p>
+        <% if current_user.role == "teacher" %>
+            <h6>Language I teach:</h6> 
+            <p><%= @user_language.language.name %></p>
+        <% else %>
+            <h6>Language I am currently learning:</h6>
+            <p><%= @user_language.language.name %></p>
+        <% end %>
     </div>
+    
     <div>
-        <%= @user.biography %>
+        <%= current_user.biography %>
     </div>
 </div>
