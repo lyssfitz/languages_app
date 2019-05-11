@@ -9,10 +9,10 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Level of Difficulty: <%= lesson.difficulty %></h5>
-                        <% if @total_students_attending == @lesson.max_students %>
+                        <% if @total_students_attending == lesson.max_students %>
                             <p>Sold Out!<p>
                             <% else %>
-                            <p class="text-muted"><%= @total_students_attending %> students are going. <%= @lesson.max_students - @total_students_attending %> tickets available</p>
+                            <p class="text-muted"><%= @total_students_attending %> students are going. <%= lesson.max_students - @total_students_attending %> tickets available</p>
                             <% end %>
                     <p class="card-text">
                     Teacher: <%= lesson.user.first_name %> <%= lesson.user.last_name %></br>
