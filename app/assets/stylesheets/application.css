@@ -14,8 +14,58 @@
  *= require_self
  */
 
-.registration-form {
-    width: 400px;
+body {
+  margin: 0px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.background-container {
+  background: url("world_globe.png") no-repeat center center;
+  background-size: cover;
+  height: 900px;
+}
+
+.align-to-center {
+  padding-top: 230px;
+  color: #ffffff;
+  font-weight: 1000;
+  font-size: 40px;
+}
+
+.view-container {
+    width: 600px;
     margin: 0px auto;
     padding-top: 50px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-container {
+  width: 300px;
+  margin: 0px auto;
+  padding-top: 100px;
+}
+
+.comments-section {
+  padding-top: 40px;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.view-headers {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  font-size: 38px;
+}
+
+.btn-margin {
+  margin-top: 20px;
+  margin-top: 20px;
 }

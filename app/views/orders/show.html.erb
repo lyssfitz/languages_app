@@ -1,3 +1,24 @@
-<% @orders.each do |order|%>
-    <%= order.price %>
-<% end %>
+<div class="view-container">
+    <h2>Students Attending Lesson</h2>
+    <div>
+        <% @orders.each do |order|%>
+            <div class="card text-left">
+                <div>
+                    <h5 class="card-header"><%= order.user.first_name %> <%= order.user.last_name %></h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Attending: <%= order.status %></h5>
+                    <p class="card-text">
+                        <%= order.user.biography %>
+                    </p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div>
+        <p>Total Students Attending: <%= @student_count %></p>
+        <p>Ticket Still Available: <%= @available_tickets %></p>
+        <p>Total Paid: $<%= number_with_precision(@total_profit, precision: 2 ) %> </p>
+    </div>
+</div>

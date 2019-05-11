@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
 
     def stripe
         order_id = params[:data][:object][:payment_intent]
@@ -19,11 +20,13 @@ class OrdersController < ApplicationController
     end
 
     def success
-
     end
 
     def show
+        lesson = Lesson.find(params[:id].to_i)
         @orders = Order.where(lesson_id: params[:id])
-
+        @student_count = @orders.count
+        @total_profit = lesson.price * @student_count
+        @available_tickets = lesson.max_students - @student_count
     end
 end

@@ -6,9 +6,14 @@ class LessonsController < ApplicationController
     before_action :authorise_student, only: [:explore]
     before_action :set_languages, only: [:new, :edit]
     before_action :set_difficulty, only: [:new, :edit]
+    before_action :set_student_attendance, only: [:index, :explore, :show]
 
     def index
-        @lessons = current_user.lessons
+        if current_user.role == "teacher"
+            @lessons = current_user.lessons
+        else
+            @lessons = current_user.ordered_lessons
+        end
     end
 
     def create
@@ -47,7 +52,7 @@ class LessonsController < ApplicationController
                       user_id: current_user.id
                   }
               },
-              success_url: 'http://localhost:3000/orders/success',
+              success_url: 'https://aqueous-garden-54322.herokuapp.com/orders/success',
               cancel_url: 'http://localhost:3000/cancel',
             )
           @stripe_session_id = stripe_session.id
@@ -102,6 +107,11 @@ class LessonsController < ApplicationController
         if current_user.role != "student"
             redirect_to lessons_path
         end
+    end
+
+    def set_student_attendance
+        orders = Order.where(lesson_id: params[:id])
+        @total_students_attending = orders.count
     end
 
     def lesson_params

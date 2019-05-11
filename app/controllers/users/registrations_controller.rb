@@ -3,12 +3,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :instant_variables_for_view
+  before_action :variables_for_lesson_views
 
   # GET /resource/sign_up
   def new
     super
-    @disable_nav = true
   end
 
   # POST /resource
@@ -25,21 +24,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     super
-    @language = current_user!.languages.ids[0]
   end
 
-  def instant_variables_for_view
-    @city = "Sydney"
+  def update
+    super
+    @users_language = UsersLanguage.find_by(user_id: current_user.id)
+    @users_language.update(
+      language_id: params[:user][:languages]
+    )
+  end
+
+  def variables_for_lesson_views
     @languages = Language.all
     @gender = User.genders.keys
     @roles = User.roles.keys
   end
-
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
+  
   # DELETE /resource
   # def destroy
   #   super
@@ -56,29 +56,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def after_update_path_for(resource)
+    super(resource)
+    if current_user.role == "teacher"
+      lessons_path
+    else 
+      explore_path
+    end
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:fist_name, :last_name, :date_of_birth, :role, :language, :gender])
+  #     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :date_of_birth, :gender, :city, :biography, :role, :picture)}
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :current_password, :date_of_birth, :gender, :city, :biography, :role, :picture)}
   # end
 
-  # def user_params
-  #   params.require(:user).permit(:first_name, :last_name, :date_of_birth, )
-  # end 
-
-  def after_sign_up_path_for(resource)
-    super(resource)
-    lessons_path
-  end
-
   # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    super(resource)
-    home_path
-  end
+  # def after_inactive_sign_up_path_for(resource)
+  #   super(resource)
+  # end
 
 end

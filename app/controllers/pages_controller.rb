@@ -3,7 +3,6 @@ class PagesController < ApplicationController
     end
 
     def show
-        @user = current_user
-        @language = current_user.languages
+        @user = UsersLanguage.find_by(user_id: current_user.id)
     end
 end

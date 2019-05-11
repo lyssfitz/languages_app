@@ -1,19 +1,17 @@
 <div>
     <div>
-        <%= image_tag @user.picture if @user.picture.attached? %>
+        <%= image_tag current_user.picture if current_user.picture.attached? %>
     </div>
     <div>
-        <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+        <p>Name: <%= current_user.first_name %> <%= current_user.last_name %></p>
     </div>
     <div>
-        <p>Location: <%= @user.city %></p>
+        <p>Location: <%= current_user.city %></p>
     </div>
     <div>
-        <p>Languages I speak:  
-
-        </p>
+        <p>Languages I speak: <%= @user.language.name %></p>
     </div>
     <div>
-        <%= @user.biography %>
+        <%= current_user.biography %>
     </div>
 </div>
