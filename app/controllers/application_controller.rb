@@ -19,15 +19,4 @@ class ApplicationController < ActionController::Base
             explore_path
         end
     end
-
-    def after_sign_up_path_for(resource)
-        super(resource)
-        if current_user.role == "teacher"
-          lessons_path
-        else 
-          explore_path
-        end
-    end
-
-    
 end

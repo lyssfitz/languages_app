@@ -2,11 +2,7 @@
   <h1 class="view-headers><%= @lesson.language.name %> Lesson</h1>
   <h2 ">Lesson Details</h2>
   <div>
-    <% if @total_students_attending == @lesson.max_students %>
-      <p>Sold Out!<p>
-    <% else %>
-      <p class="text-muted"><%= @total_students_attending %> students are going. <%= @lesson.max_students - @total_students_attending %> tickets available</p>
-    <% end %>
+    <p class="text-muted"><%= @total_students_attending %> students are going. <%= @lesson.max_students - @total_students_attending %> tickets available</p>
     <p>Teacher: <%= @lesson.user.first_name + " " + @lesson.user.last_name %></p> 
     <p>Date: <%= l @lesson.lesson_date %></p> 
     <p>Time: <%= l @lesson.lesson_time %></p> 
@@ -21,8 +17,10 @@
     <%= link_to "Edit", edit_lesson_path(@lesson.id), class: "btn btn-outline-dark" %>
     <%= link_to "Delete", @lesson, method: :delete, class: "btn btn-outline-dark" %>
     <%= link_to "See Students Attending", lesson_orders_path(@lesson.id), class: "btn btn-outline-dark" %>
+    <% elsif @total_students_attending == @lesson.max_students  %>
+      <p>Sold Out!<p>
     <% else %>
-    <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
+      <button id="stripePayment" class="btn btn-outline-dark" > Buy Ticket $<%= number_with_precision(@lesson.price, precision: 2 ) %> </button>  
     <% end %>
   </div>
 
