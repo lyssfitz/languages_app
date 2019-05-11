@@ -14,10 +14,18 @@
  *= require_self
  */
 
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
+
 body {
   margin: 0px auto;
   width: 100%;
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
 }
 
 .background-container {
@@ -26,8 +34,13 @@ body {
   height: 900px;
 }
 
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+}
+
 .align-to-center {
-  padding-top: 230px;
+  padding-top: 260px;
   color: #ffffff;
   font-weight: 1000;
   font-size: 40px;
@@ -38,6 +51,13 @@ body {
     margin: 0px auto;
     padding-top: 50px;
 }
+
+.lesson-container {
+  width: 400px;
+  margin: 0px auto;
+  padding-top: 50px;
+}
+
 
 .navbar {
   display: flex;

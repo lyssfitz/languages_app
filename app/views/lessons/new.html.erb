@@ -1,11 +1,9 @@
-<div class="view-container">
-<h1> New Lesson </h1>
-
-<% if @lesson.errors.any? %>
-    <% @lesson.errors.full_messages.each do |error|%>
-        <p> <%= error %> </p>
+<div class="lesson-container">
+    <h1> New Lesson </h1>
+    <% if @lesson.errors.any? %>
+      <% @lesson.errors.full_messages.each do |error|%>
+          <p> <%= error %> </p>
+      <% end %>
     <% end %>
-<% end %>
-
-<%= render "form", lesson: @lesson, languages: @languages, difficulty: @difficulty %>
+    <%= render "form", lesson: @lesson, languages: @languages, difficulty: @difficulty %>
 </div>
