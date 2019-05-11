@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-    before_action :authenticate_user!
+    
     before_action :set_lesson, only: [:show, :edit, :update, :destroy]
     before_action :authorise_user, only: [:edit, :update, :destroy]
     before_action :authorise_teacher, only: [:new, :edit, :update]
