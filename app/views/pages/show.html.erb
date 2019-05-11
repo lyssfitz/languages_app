@@ -8,14 +8,17 @@
     </div>
 
     <div>
-        <p><span>Location:</span> <%= current_user.city %></p>
+        <h6>Location:</h6> 
+        <p><%= current_user.city %></p>
     </div>
 
     <div>
         <% if current_user.role == "teacher" %>
-            <p>Language I teach: <%= @user.language.name %></p>
+            <h6>Language I teach:</h6> 
+            <p><%= @user_language.language.name %></p>
         <% else %>
-            <p>Language I am currently learning: <%= @user.language.name %></p>
+            <h6>Language I am currently learning:</h6>
+            <p><%= @user_language.language.name %></p>
         <% end %>
     </div>
     

@@ -1,5 +1,6 @@
 <div class="view-container">
 	<h1 class="view-headers"> Find A Lesson </h1>
+  <h6 class="text-muted"><%= @total_lessons %> lessons near you</h6>
 	<% if @lessons.empty? %>
 		<p> Oh no! There are no current lessons scheduled in your selected languages. Please bookmark this page and check back again soon!</p>
 	<% else %>
