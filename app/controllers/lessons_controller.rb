@@ -36,6 +36,8 @@ class LessonsController < ApplicationController
         @comment = Comment.new
         @comments = Comment.all.where(lesson_id: params[:id])
         price = @lesson.price * 100
+        
+        domain = request.base_url
         stripe_session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
             customer_email: current_user.email,
@@ -45,17 +47,17 @@ class LessonsController < ApplicationController
                 amount: price,
                 currency: 'aud',
                 quantity: 1,
-              }],
-              payment_intent_data: {
-                  metadata: {
-                      lesson_id: @lesson.id,
-                      user_id: current_user.id
-                  }
-              },
-              success_url: 'https://aqueous-garden-54322.herokuapp.com/orders/success',
-              cancel_url: 'http://localhost:3000/cancel',
+            }],
+            payment_intent_data: {
+                metadata: {
+                    lesson_id: @lesson.id,
+                    user_id: current_user.id
+                }
+            },
+            success_url: "#{domain}/orders/success",
+            cancel_url: "http://localhost:3000/cancel",
             )
-          @stripe_session_id = stripe_session.id
+      @stripe_session_id = stripe_session.id
     end
 
     def edit 
@@ -115,7 +117,7 @@ class LessonsController < ApplicationController
         orders = Order.where(lesson_id: params[:id])
         @total_students_attending = orders.count
     end
-
+    
     def lesson_params
         params.require(:lesson).permit(:language_id, :body, :lesson_date, :lesson_time, :street, :city, :state, :postcode, :price, :max_students, :difficulty)
     end 
