@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   def set_default_picture
     unless picture.attached?
-      picture.attach(io: File.open('app/assets/images/avatar.png'), filename: 'avatar.png', content_type: 'image/png')
+      picture.attach(io: File.open(image-path('app/assets/images/avatar.png')), filename: 'avatar.png', content_type: 'image/png')
     end
   end
 end
