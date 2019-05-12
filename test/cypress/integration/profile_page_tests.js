@@ -21,14 +21,8 @@ describe("Profile page", () => {
     cy.get('input[name="commit"]').click();
   });
 
-  beforeEach(() => {
-    // cy.visit("/login");
-    // cy.get('input[id="user_email"]').type("John");
-    // cy.get('input[id="user_last_name"]').type("Smith");
-  });
-
   it("should display the page content", () => {
-    // cy.visit("/profile");
+    cy.visit("/profile");
   });
 });
 

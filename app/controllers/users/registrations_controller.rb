@@ -29,9 +29,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
     @users_language = UsersLanguage.find_by(user_id: current_user.id)
-    @users_language.update(
-      language_id: params[:user][:languages]
-    )
+    if @users_language != nil
+      @users_language.update(
+        language_id: params[:user][:languages]
+      )
+    else
+      UsersLanguage.create(
+        user_id: current_user.id,
+        language_id: params[:user][:languages]
+      )
+    end
   end
 
   def variables_for_lesson_views
