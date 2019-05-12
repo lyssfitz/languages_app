@@ -1,8 +1,13 @@
 <div>
     <div class="rounded mx-auto d-block">
-        <%= image_tag current_user.picture if current_user.picture.attached? %>
+        
+        <% if current_user.picture.attached? %>
+            <%= image_tag current_user.picture %>
+        <% else %>
+            <%= image_tag("avatar.png", :alt => "default image") %>
+        <% end %>
     </div>
-
+    
     <div>
         <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
     </div>
