@@ -1,8 +1,13 @@
 <div>
     <div class="rounded mx-auto d-block">
-        <%= image_tag current_user.picture if current_user.picture.attached? %>
+        
+        <% if current_user.picture.attached? %>
+            <%= image_tag current_user.picture %>
+        <% else %>
+            <%= image_tag("avatar.png", :alt => "default image") %>
+        <% end %>
     </div>
-
+    
     <div>
         <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
     </div>
@@ -11,8 +16,9 @@
         <h6>Location:</h6> 
         <p><%= current_user.city %></p>
     </div>
-
+<% unless @user_language == nil %>
     <div>
+    
         <% if current_user.role == "teacher" %>
             <h6>Language I teach:</h6> 
             <p><%= @user_language.language.name %></p>
@@ -21,7 +27,7 @@
             <p><%= @user_language.language.name %></p>
         <% end %>
     </div>
-    
+    <% end %>
     <div>
         <%= current_user.biography %>
     </div>
