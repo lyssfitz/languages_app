@@ -11,8 +11,9 @@
         <h6>Location:</h6> 
         <p><%= current_user.city %></p>
     </div>
-
+<% unless @user_language == nil %>
     <div>
+    
         <% if current_user.role == "teacher" %>
             <h6>Language I teach:</h6> 
             <p><%= @user_language.language.name %></p>
@@ -21,7 +22,7 @@
             <p><%= @user_language.language.name %></p>
         <% end %>
     </div>
-    
+    <% end %>
     <div>
         <%= current_user.biography %>
     </div>
